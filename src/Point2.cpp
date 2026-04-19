@@ -1,26 +1,26 @@
-#include "Point.h"
+#include "Point2.h"
 #include "Vector2.h"
 
 #include <cmath>
 
 
-Point::Point(double x, double y):
+Point2::Point2(double x, double y):
 X(x), Y(y) {}
 
-Point Point::operator+(const Vector2& vector2) const{
-    return Point(
+Point2 Point2::operator+(const Vector2& vector2) const{
+    return Point2(
         X + vector2.getDeltaX(), 
         Y + vector2.getDeltaY()
     );
 }
 
-Point Point::operator-(const Vector2& vector2) const{
-    return Point(
+Point2 Point2::operator-(const Vector2& vector2) const{
+    return Point2(
         X - vector2.getDeltaX(), 
         Y - vector2.getDeltaY()
     );
 }
-Vector2 Point::operator-(const Point& to) const{
+Vector2 Point2::operator-(const Point2& to) const{
     double deltaX = to.X - X;
     double deltaY = to.Y - Y;
 

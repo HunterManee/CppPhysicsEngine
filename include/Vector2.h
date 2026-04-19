@@ -1,7 +1,5 @@
 #pragma once //The header can only be used once
 
-struct Point; //forward declaration
-
 
 struct Vector2{
     double Magnitude;
