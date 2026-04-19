@@ -1,5 +1,6 @@
 #pragma once //The header can only be used once
-#include "Vector2.h"
+
+struct Vector2; //forward declaration
 
 struct Point {
     double X;

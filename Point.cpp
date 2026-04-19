@@ -1,4 +1,5 @@
 #include "Point.h"
+#include "Vector2.h"
 
 #include <cmath>
 
@@ -10,6 +11,12 @@ Point Point::operator+(const Vector2& vector2) const{
     return Point(
         X + vector2.getDeltaX(), 
         Y + vector2.getDeltaY()
+    );
+}
+Point Point::operator-(const Vector2& vector2) const{
+    return Point(
+        X - vector2.getDeltaX(), 
+        Y - vector2.getDeltaY()
     );
 }
 
