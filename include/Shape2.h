@@ -3,6 +3,8 @@
 
 struct Shape2 {
     Point2 Position;
+    double Rotation;
+    double Scale;
 
     Shape2(const Point2& position);
 };
