@@ -7,8 +7,6 @@
 //Constructors
 Vector2::Vector2(double magnitude, double theta):
 Magnitude(magnitude), Theta(theta) {}
-Vector2::Vector2(const Point& from, const Point& to):
-Magnitude(from.distanceTo(to)), Theta(from.angleTo(to)) {}
 
 //Overloaded Operators
 Vector2 Vector2::operator+(const Vector2& vector2) const {

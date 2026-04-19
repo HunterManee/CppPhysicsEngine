@@ -13,8 +13,8 @@ struct Point {
     Point operator+(const Vector2& vector2) const;
     Point operator-(const Vector2& vector2) const;
 
-    //Public Functions
-    double distanceTo(const Point& point) const;
-    double angleTo(const Point& point) const;
+    //Creating a vector from to points
+    Vector2 operator-(const Point& point) const;
+    
 
 };

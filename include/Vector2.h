@@ -9,7 +9,6 @@ struct Vector2{
 
     //Constructors
     Vector2(double magnitude, double theta);
-    Vector2(const Point& from, const Point& to);
 
     //Overloaded Operators
     Vector2 operator+(const Vector2& vector2) const;
