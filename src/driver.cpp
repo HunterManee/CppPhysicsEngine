@@ -27,8 +27,7 @@ int main() {
     //       Shape2 Test       //
     /////////////////////////////
     
-    Point2 point{5, 4};
-    Shape2 shape2{point};
+    Shape2 shape2{};
 
     cout << "X coor: " << shape2.Position.X << endl;
     cout << "Y coor: " << shape2.Position.Y << endl;

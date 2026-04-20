@@ -5,8 +5,8 @@
 #include <cmath>
 
 //Constructors
-Vector2::Vector2(double magnitude = 1, double theta = 0):
-Magnitude(magnitude), Theta(theta) {}
+Vector2::Vector2(double magnitude, double theta):
+Magnitude{magnitude}, Theta{theta} {}
 
 //Overloaded Operators
 Vector2 Vector2::operator+(const Vector2& vector2) const {
@@ -16,7 +16,7 @@ Vector2 Vector2::operator+(const Vector2& vector2) const {
     double magnitude = sqrt(deltaX * deltaX + deltaY * deltaY);
     double theta = atan2(deltaY, deltaX);
 
-    return Vector2(magnitude, theta);
+    return {magnitude, theta};
 }
 Vector2 Vector2::operator-(const Vector2& vector2) const {
     double deltaX = getDeltaX() - vector2.getDeltaX();
@@ -25,7 +25,7 @@ Vector2 Vector2::operator-(const Vector2& vector2) const {
     double magnitude = sqrt(deltaX * deltaX + deltaY * deltaY);
     double theta = atan2(deltaY, deltaX);
 
-    return Vector2(magnitude, theta);
+    return {magnitude, theta};
 }
 Vector2 Vector2::operator*(const double scalar) const {
     double deltaX = getDeltaX() * scalar;
@@ -34,7 +34,7 @@ Vector2 Vector2::operator*(const double scalar) const {
     double magnitude = sqrt(deltaX * deltaX + deltaY * deltaY);
     double theta = atan2(deltaY, deltaX);
 
-    return Vector2(magnitude, theta);
+    return {magnitude, theta};
 }
 
 //Public Functions
@@ -45,5 +45,5 @@ double Vector2::getDeltaY() const {
     return Magnitude * sin(Theta);
 }
 Vector2 Vector2::normalize() const {
-    return Vector2(1, Theta);
+    return {1, Theta};
 }

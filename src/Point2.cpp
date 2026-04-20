@@ -4,21 +4,15 @@
 #include <cmath>
 
 
-Point2::Point2(double x = 0, double y = 0):
-X(x), Y(y) {}
+Point2::Point2(double x, double y):
+X{x}, Y{y} {}
 
 Point2 Point2::operator+(const Vector2& vector2) const{
-    return Point2(
-        X + vector2.getDeltaX(), 
-        Y + vector2.getDeltaY()
-    );
+    return { X + vector2.getDeltaX(), Y + vector2.getDeltaY() };
 }
 
 Point2 Point2::operator-(const Vector2& vector2) const{
-    return Point2(
-        X - vector2.getDeltaX(), 
-        Y - vector2.getDeltaY()
-    );
+    return { X - vector2.getDeltaX(), Y - vector2.getDeltaY() };
 }
 Vector2 Point2::operator-(const Point2& to) const{
     double deltaX = to.X - X;
@@ -27,5 +21,5 @@ Vector2 Point2::operator-(const Point2& to) const{
     double magnitude = sqrt(deltaX * deltaX + deltaY * deltaY);
     double theta = atan2(deltaY, deltaX);
 
-    return Vector2(magnitude, theta);
+    return { magnitude, theta };
 }
