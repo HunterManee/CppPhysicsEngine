@@ -7,8 +7,7 @@ struct Point2 {
     double Y;
 
     //Constuctor
-    Point2();
-    Point2(double x, double y);
+    Point2(double x = 0, double y = 0);
 
     //Overloaded Operators
     Point2 operator+(const Vector2& vector2) const;

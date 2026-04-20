@@ -4,10 +4,7 @@
 #include <cmath>
 
 
-Point2::Point2(): 
-X(0), Y(0) {}
-
-Point2::Point2(double x, double y):
+Point2::Point2(double x = 0, double y = 0):
 X(x), Y(y) {}
 
 Point2 Point2::operator+(const Vector2& vector2) const{

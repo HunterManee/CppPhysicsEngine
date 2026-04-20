@@ -5,7 +5,7 @@
 #include <cmath>
 
 //Constructors
-Vector2::Vector2(double magnitude, double theta):
+Vector2::Vector2(double magnitude = 1, double theta = 0):
 Magnitude(magnitude), Theta(theta) {}
 
 //Overloaded Operators
