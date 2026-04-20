@@ -7,6 +7,7 @@ struct Point2 {
     double Y;
 
     //Constuctor
+    Point2();
     Point2(double x, double y);
 
     //Overloaded Operators

@@ -4,6 +4,9 @@
 #include <cmath>
 
 
+Point2::Point2(): 
+X(0), Y(0) {}
+
 Point2::Point2(double x, double y):
 X(x), Y(y) {}
 

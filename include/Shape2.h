@@ -6,5 +6,6 @@ struct Shape2 {
     double Rotation;
     double Scale;
 
+    Shape2();
     Shape2(const Point2& position);
 };
