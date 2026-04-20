@@ -8,4 +8,5 @@ struct Shape2 {
 
     Shape2();
     Shape2(const Point2& position);
+    Shape2(const Point2& position, double rotation);
 };
