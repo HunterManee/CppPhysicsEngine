@@ -13,7 +13,7 @@ struct Point2 {
     Point2 operator+(const Vector2& vector2) const;
     Point2 operator-(const Vector2& vector2) const;
 
-    //Creating a vector from to
+    //Creating a vector from - to
     Vector2 operator-(const Point2& point) const;
     
 
