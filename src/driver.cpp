@@ -5,7 +5,12 @@ using namespace std;
 
 #include "Point2.h"
 #include "Vector2.h"
-#include "Shape2.h"
+#include "PolygonCollider2.h"
+#include "CircleCollider2.h"
+
+#include "Rigidbody2.h"
+
+#include "Entity.h"
 
 int main() {
 
@@ -23,14 +28,35 @@ int main() {
     // cout << "Mag: " << v1.Magnitude << " Theta: " << v1.Theta<< endl;
     // cout << "X: " << p2.X << " Y: " << p2.Y << endl;
 
-    /////////////////////////////
-    //       Shape2 Test       //
-    /////////////////////////////
-    
-    Shape2 shape2{};
 
-    cout << "X coor: " << shape2.Position.X << endl;
-    cout << "Y coor: " << shape2.Position.Y << endl;
+    
+    /////////////////////////////
+    //      Entity Testing     //
+    /////////////////////////////
+
+    //Empty Entity & Add Components
+    // Entity e{Transform{}};
+
+    // vector<Point2> verticies;
+    // e.AddComponent<PolygonCollider2>(verticies);
+    // e.AddComponent<Rigidbody2>();
+
+
+    //Entity with CircleCollider and Rigidbody
+    // double radius = 10;
+    // Entity e{
+    //     Transform{},
+    //     std::make_unique<CircleCollider2>(radius),
+    //     std::make_unique<Rigidbody2>()
+    // };
+
+    //Entity with PolygonCollider and Rigidbody
+    // vector<Point2> verticies;
+    // Entity e{
+    //     Transform{},
+    //     std::make_unique<PolygonCollider2>(verticies),
+    //     std::make_unique<Rigidbody2>()
+    // };
 
 
 }
