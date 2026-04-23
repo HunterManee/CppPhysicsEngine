@@ -10,7 +10,6 @@ X{x}, Y{y} {}
 Point2 Point2::operator+(const Vector2& vector2) const{
     return { X + vector2.getDeltaX(), Y + vector2.getDeltaY() };
 }
-
 Point2 Point2::operator-(const Vector2& vector2) const{
     return { X - vector2.getDeltaX(), Y - vector2.getDeltaY() };
 }
