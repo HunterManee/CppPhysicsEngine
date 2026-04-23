@@ -1,6 +1,9 @@
 #pragma once //The header can only be used once
 
+#include <string>
+
 struct Vector2; //forward declaration
+
 
 struct Point2 {
     double X;
@@ -16,5 +19,7 @@ struct Point2 {
     //Creating a vector from - to
     Vector2 operator-(const Point2& point) const;
     
+    
+    std::string toString() const;
 
 };

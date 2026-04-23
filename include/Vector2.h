@@ -1,5 +1,6 @@
 #pragma once //The header can only be used once
 
+#include <string>
 
 struct Vector2{
     double Magnitude;
@@ -17,4 +18,6 @@ struct Vector2{
     double getDeltaX() const;
     double getDeltaY() const;
     Vector2 normalize() const;
+
+    std::string toString() const;
 };

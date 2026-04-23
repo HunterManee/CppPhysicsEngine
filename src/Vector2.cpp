@@ -47,3 +47,7 @@ double Vector2::getDeltaY() const {
 Vector2 Vector2::normalize() const {
     return {1, Theta};
 }
+
+std::string Vector2::toString() const{
+    return "(" + std::to_string(Magnitude) + " ," + std::to_string(Theta)+ " rad)";
+}

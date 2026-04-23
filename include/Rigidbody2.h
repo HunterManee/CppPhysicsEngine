@@ -1,3 +1,0 @@
-
-
-struct Rigidbody2{};
