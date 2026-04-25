@@ -3,6 +3,8 @@
 //////////////////
 // Constructors //
 //////////////////
+
+
 Transform::Transform() {}
 Transform::Transform(const Point2& position):
 Position{position} {}
@@ -12,6 +14,8 @@ Position{position}, Rotation{rotation} {}
 /////////////////////////
 // Getters and Setters //
 /////////////////////////
+
+
 Point2 Transform::getPosition() const{
     return Position; //returns a copy
 }
@@ -36,6 +40,8 @@ void Transform::setScale(const Point2& scale) {
 ///////////////
 // Behaviors //
 ///////////////
+
+
 void Transform::move(const Vector2& vector) {
     setPosition(Position + vector);
 }
@@ -43,6 +49,8 @@ void Transform::move(const Vector2& vector) {
 //////////////////////
 // Expected Methods //
 //////////////////////
+
+
 std::string Transform::toString() const{
     return "Position: " + Position.toString() + "\n" +
            "Rotation: " + std::to_string(Rotation) + " Rads\n" +
