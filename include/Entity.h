@@ -9,8 +9,10 @@ class Entity {
         Collider* collider{nullptr};
     public:
         Entity();
+        Entity(const Collider* c);
+
         Entity(const Transform& t);
-        Entity(const Transform& t, Collider* c = nullptr);
+        Entity(const Transform& t, const Collider* c);
 
 
         std::string toString() const;

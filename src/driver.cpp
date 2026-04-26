@@ -6,6 +6,8 @@ using namespace std;
 #include "Vector2.h"
 #include "Transform.h"
 
+#include "CircleCollider.h"
+
 #include "Entity.h"
 
 
@@ -38,7 +40,8 @@ int main() {
     // TransformGetterAndSettersTest();
     // TransformBehaviorTest();
     
-    Entity e;
+    CircleCollider collider{5};
+    Entity e{&collider};
     cout << e.toString();
 }
 
