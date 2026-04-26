@@ -6,6 +6,8 @@ using namespace std;
 #include "Vector2.h"
 #include "Transform.h"
 
+#include "Entity.h"
+
 
 //Structs
 void PointConstructorTest();
@@ -35,6 +37,9 @@ int main() {
     // TransformConstructorTest();
     // TransformGetterAndSettersTest();
     // TransformBehaviorTest();
+    
+    Entity e;
+    cout << e.toString();
 }
 
 //Structs

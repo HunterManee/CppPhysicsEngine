@@ -52,7 +52,13 @@ void Transform::move(const Vector2& vector) {
 
 
 std::string Transform::toString() const{
-    return "Position: " + Position.toString() + "\n" +
-           "Rotation: " + std::to_string(Rotation) + " Rads\n" +
-           "Scale:    " + Scale.toString() + "\n";
+    
+    std::string output = "";
+    output += "--Transform--------------------------\n";
+    output += "->Position: " + Position.toString() + "\n";
+    output += "->Rotation: " + std::to_string(Rotation) + " Rads\n";
+    output += "->Scale:    " + Scale.toString() + "\n";
+
+    return output;
+
 }
