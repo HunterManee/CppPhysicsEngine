@@ -55,9 +55,9 @@ std::string Transform::toString() const{
     
     std::string output = "";
     output += "--Transform--------------------------\n";
-    output += "->Position: " + Position.toString() + "\n";
-    output += "->Rotation: " + std::to_string(Rotation) + " Rads\n";
-    output += "->Scale:    " + Scale.toString() + "\n";
+    output += "  L--> Position: " + Position.toString() + "\n";
+    output += "  L--> Rotation: " + std::to_string(Rotation) + " Rads\n";
+    output += "  L--> Scale:    " + Scale.toString() + "\n";
 
     return output;
 
