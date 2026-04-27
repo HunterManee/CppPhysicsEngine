@@ -7,6 +7,7 @@ using namespace std;
 #include "Transform.h"
 
 #include "CircleCollider.h"
+#include "PolygonCollider.h"
 
 #include "Entity.h"
 
@@ -40,9 +41,23 @@ int main() {
     // TransformGetterAndSettersTest();
     // TransformBehaviorTest();
     
-    CircleCollider collider{5};
-    Entity e{&collider};
-    cout << e.toString();
+    CircleCollider colliderC{5};
+    Entity e1{&colliderC};
+    cout << e1.toString() << endl;
+
+    int size = 2;
+    Point2* vertices = new Point2[size];
+    vertices[0] = {0,1};
+    vertices[1] = {1,2};
+    PolygonCollider colliderP{vertices, size};
+    
+    //Clean Up
+    delete[] vertices;
+    vertices = nullptr;
+
+    Entity e2{&colliderP};
+    cout << e2.toString() << endl;
+
 }
 
 //Structs
