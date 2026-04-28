@@ -4,6 +4,8 @@
 class CircleCollider : public Collider {
     private:
         double Radius{1};
+        const double MinRandRadius{1};
+        const double MaxRandRadius{20};
         
     public:
         CircleCollider();

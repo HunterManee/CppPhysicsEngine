@@ -3,13 +3,12 @@
 
 CircleCollider::CircleCollider(){
     Random randNum;
-    Radius = randNum.getRandomDouble(1, 5);
+    Radius = randNum.getRandomDouble(MinRandRadius, MaxRandRadius);
 };
 
 CircleCollider::CircleCollider(double radius):
 Radius{radius} {
-    Random randNum;
-    radius = randNum.getRandomDouble(1, 5);
+    Radius = radius;
 };
 
 CircleCollider::CircleCollider(const CircleCollider& toCopy) {

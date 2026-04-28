@@ -9,7 +9,6 @@ class PolygonCollider : public Collider{
         int Size{0};
 
     public:
-
         //Constructor
         PolygonCollider();
         PolygonCollider(const Point2 vertices[], int size);
