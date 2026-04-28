@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+#include "Random.h"
+
 class Collider{
     public: 
         virtual ~Collider() = default;

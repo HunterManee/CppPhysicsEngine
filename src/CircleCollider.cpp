@@ -1,8 +1,16 @@
 #include "CircleCollider.h"
 #include <iostream>
 
+CircleCollider::CircleCollider(){
+    Random randNum;
+    Radius = randNum.getRandomDouble(1, 5);
+};
+
 CircleCollider::CircleCollider(double radius):
-Radius{radius} {};
+Radius{radius} {
+    Random randNum;
+    radius = randNum.getRandomDouble(1, 5);
+};
 
 CircleCollider::CircleCollider(const CircleCollider& toCopy) {
     *this = toCopy;

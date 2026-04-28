@@ -41,7 +41,7 @@ int main() {
     // TransformGetterAndSettersTest();
     // TransformBehaviorTest();
     
-    CircleCollider colliderC{5};
+    CircleCollider colliderC{};
     Entity e1{&colliderC};
     cout << e1.toString() << endl;
 

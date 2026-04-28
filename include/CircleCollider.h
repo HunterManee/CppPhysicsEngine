@@ -6,7 +6,8 @@ class CircleCollider : public Collider {
         double Radius{1};
         
     public:
-        CircleCollider(double radius = 0);
+        CircleCollider();
+        CircleCollider(double radius);
         CircleCollider(const CircleCollider& toCopy);
 
         void function() override;
