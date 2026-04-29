@@ -1,9 +1,9 @@
 #include "CircleCollider.h"
 #include <iostream>
 
+
 CircleCollider::CircleCollider(){
-    Random randNum;
-    Radius = randNum.getRandomDouble(MinRandRadius, MaxRandRadius);
+    Radius = Random::getRandomDouble(MinRandRadius, MaxRandRadius);
 };
 
 CircleCollider::CircleCollider(double radius):

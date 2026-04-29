@@ -4,10 +4,12 @@
 class CircleCollider : public Collider {
     private:
         double Radius{1};
-        const double MinRandRadius{1};
-        const double MaxRandRadius{20};
-        
+
     public:
+
+        static constexpr double MinRandRadius{1};
+        static constexpr double MaxRandRadius{20};
+
         CircleCollider();
         CircleCollider(double radius);
         CircleCollider(const CircleCollider& toCopy);

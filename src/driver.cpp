@@ -23,6 +23,10 @@ void TransformConstructorTest();
 void TransformGetterAndSettersTest();
 void TransformBehaviorTest();
 
+void CircleColliderConstructorTest();
+
+void PolygonColliderConstructorTest();
+
 int main() {
 
 //STRUCTS
@@ -41,26 +45,33 @@ int main() {
     // TransformGetterAndSettersTest();
     // TransformBehaviorTest();
     
-    CircleCollider colliderC{};
-    Entity e1{&colliderC};
-    cout << e1.toString() << endl;
-
-    int size = 2;
-    Point2* vertices = new Point2[size];
-    vertices[0] = {0,1};
-    vertices[1] = {1,2};
-    PolygonCollider colliderP{vertices, size};
+    // CircleCollider Tests
+    // CircleColliderConstructorTest();
     
-    //Clean Up
-    delete[] vertices;
-    vertices = nullptr;
+    // PolygonCollider Tests
+    PolygonColliderConstructorTest();
 
-    Entity e2{&colliderP};
-    cout << e2.toString() << endl;
+    // CircleCollider colliderC{};
+    // Entity e1{&colliderC};
+    // cout << e1.toString() << endl;
+
+    // int size = 2;
+    // Point2* vertices = new Point2[size];
+    // vertices[0] = {0,1};
+    // vertices[1] = {1,2};
+    // PolygonCollider colliderP{vertices, size};
+    
+    // //Clean Up
+    // delete[] vertices;
+    // vertices = nullptr;
+
+    // Entity e2{&colliderP};
+    // cout << e2.toString() << endl;
 
 }
 
 //Structs
+//--Point2--------------------------------
 void PointConstructorTest() {
     // Default Constructor test
     // Point2 p1{};
@@ -90,6 +101,7 @@ void PointOverloadOperatorTest() {
     // cout << p1.toString() << " - " << v1.toString() << " = " << p2.toString();
 }
 
+//--Vector2-------------------------------
 void VectorConstructorTest() {
     // Default Constructor test;
     // Vector2 v1{};
@@ -120,6 +132,7 @@ void VectorOverloadOperatorTest() {
 }
 
 //Classes
+//--Transform-----------------------------
 void TransformConstructorTest() {
     // Default Constructor test
     // Transform transform{};
@@ -165,4 +178,20 @@ void TransformBehaviorTest() {
 
 
 
+}
+//--CircleCollider------------------------
+void CircleColliderConstructorTest() {
+    // Default Constructor (Random Radius)
+    // CircleCollider c1{};
+    // cout << c1.toString() << endl;
+
+    //Constructor (double radius)
+    // CircleCollider c1{5};
+    // cout << c1.toString() << endl;
+} 
+
+//--PolygonCollider-----------------------
+void PolygonColliderConstructorTest() {
+    PolygonCollider p1{};
+    cout << p1.toString() << endl;
 }

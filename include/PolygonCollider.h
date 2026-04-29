@@ -8,6 +8,9 @@ class PolygonCollider : public Collider{
         Point2* Vertices{nullptr};
         int Size{0};
 
+        const int Min_Vertices{3};
+        const int Max_Vertices{8};
+        
     public:
         //Constructor
         PolygonCollider();
@@ -23,5 +26,8 @@ class PolygonCollider : public Collider{
         Collider* clone() const override;
         std::string toString() const override;
 
+
+    private: //Helper Methods
+        void setRandVertices();
 
     };
