@@ -162,7 +162,7 @@ void EntityColliderConstructorTest() {
 //--System Output-------------------------
 void SystemOutputTest() {
     //Serialize
-    Transform t{{50, 50}};
+    Transform t{};
     PolygonCollider p{};
     CircleCollider c{};
     Entity e{t, &p};

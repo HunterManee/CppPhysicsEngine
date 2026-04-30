@@ -41,6 +41,23 @@ function drawPolygon(vertices, transform) {
     ctx.stroke();
 }
 
+
+function drawCircle(transform, radius) {
+    ctx.beginPath();
+
+    ctx.arc(
+        transform.position.x,
+        transform.position.y,
+        radius * transform.scale.x, // optional scaling
+        0,
+        Math.PI * 2
+    );
+
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+}
+
 async function main() {
     const data = await loadData();
 
@@ -56,6 +73,9 @@ async function main() {
 
     if (data.collider.type === "polygon") {
         drawPolygon(data.collider.vertices, data.transform);
+    }
+    else if(data.collider.type === "circle") {
+        drawCircle(data.transform, data.collider.radius)
     }
 }
 
