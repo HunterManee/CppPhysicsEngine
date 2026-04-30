@@ -7,8 +7,8 @@ class CircleCollider : public Collider {
 
     public:
 
-        static constexpr double MinRandRadius{1};
-        static constexpr double MaxRandRadius{20};
+        static constexpr double MinRandRadius{50};
+        static constexpr double MaxRandRadius{100};
 
         CircleCollider();
         CircleCollider(double radius);

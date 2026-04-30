@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <cmath>
 using namespace std;
 
@@ -123,6 +124,7 @@ void TransformBehaviorTest() {
 
 
 }
+
 //--CircleCollider------------------------
 void CircleColliderConstructorTest() {
     // Default Constructor (Random Radius)
@@ -151,6 +153,31 @@ void PolygonColliderConstructorTest() {
     // cout << p1.toString() << endl;
 }
 
+//--Entity--------------------------------
+void EntityColliderConstructorTest() {
+
+}
+
+
+//--System Output-------------------------
+void SystemOutputTest() {
+    //Serialize
+    Transform t{{50, 50}};
+    PolygonCollider p{};
+    CircleCollider c{};
+    Entity e{t, &p};
+    json j = e.serialize();
+    cout << j.dump(4);
+    ofstream file("data.json");
+    
+    if(!file){
+        cerr << "Failed to open file\n";
+        return;
+    }
+
+    file << j.dump(4);
+}
+
 int main() {
 
 //STRUCTS
@@ -175,15 +202,6 @@ int main() {
     // PolygonCollider Tests
     // PolygonColliderConstructorTest();
 
-    Point2 point{1,1};
-    Transform t{point};
+    SystemOutputTest();
 
-    PolygonCollider p{};
-    CircleCollider c{};
-
-    Entity e{t, &c};
-
-    json j = e.serialize();
-
-    cout << j.dump(4);
 }
