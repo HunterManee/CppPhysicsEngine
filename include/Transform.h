@@ -1,6 +1,9 @@
 #pragma once
 #include "Point2.h"
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 class Transform
 {
     private:
@@ -41,4 +44,5 @@ class Transform
     //////////////////////
 
         std::string toString() const;
+        json serialize() const;
 };

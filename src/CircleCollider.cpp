@@ -30,5 +30,13 @@ std::string CircleCollider::toString() const {
     output += "  L--> Radius: " + std::to_string(Radius);
 
     return output;
+}
 
+json CircleCollider::serialize() const {
+    json j;
+
+    j["type"] = "circle";
+    j["radius"] = Radius;
+
+    return j;
 }

@@ -2,6 +2,9 @@
 #include <cmath>
 using namespace std;
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 #include "Point2.h"
 #include "Vector2.h"
 #include "Transform.h"
@@ -10,65 +13,6 @@ using namespace std;
 #include "PolygonCollider.h"
 
 #include "Entity.h"
-
-
-//Structs
-void PointConstructorTest();
-void VectorConstructorTest();
-void PointOverloadOperatorTest();
-void VectorOverloadOperatorTest();
-
-//Classes
-void TransformConstructorTest();
-void TransformGetterAndSettersTest();
-void TransformBehaviorTest();
-
-void CircleColliderConstructorTest();
-
-void PolygonColliderConstructorTest();
-
-int main() {
-
-//STRUCTS
-    //Point2 Tests
-    // PointConstructorTest();
-    // PointOverloadOperatorTest();
-
-    //Vector2 Tests
-    // VectorConstructorTest();
-    // VectorOverloadOperatorTest();
-
-
-//CLASSES
-    // Transform Tests
-    // TransformConstructorTest();
-    // TransformGetterAndSettersTest();
-    // TransformBehaviorTest();
-    
-    // CircleCollider Tests
-    // CircleColliderConstructorTest();
-    
-    // PolygonCollider Tests
-    PolygonColliderConstructorTest();
-
-    // CircleCollider colliderC{};
-    // Entity e1{&colliderC};
-    // cout << e1.toString() << endl;
-
-    // int size = 2;
-    // Point2* vertices = new Point2[size];
-    // vertices[0] = {0,1};
-    // vertices[1] = {1,2};
-    // PolygonCollider colliderP{vertices, size};
-    
-    // //Clean Up
-    // delete[] vertices;
-    // vertices = nullptr;
-
-    // Entity e2{&colliderP};
-    // cout << e2.toString() << endl;
-
-}
 
 //Structs
 //--Point2--------------------------------
@@ -189,9 +133,57 @@ void CircleColliderConstructorTest() {
     // CircleCollider c1{5};
     // cout << c1.toString() << endl;
 } 
-
 //--PolygonCollider-----------------------
 void PolygonColliderConstructorTest() {
-    PolygonCollider p1{};
-    cout << p1.toString() << endl;
+    //Default Constructor (Random Vertices)
+    // PolygonCollider p1{};
+    // cout << p1.toString() << endl;
+
+    //Constructor (Point2 vertices[], int size)
+    // int size = 4;
+    // Point2* vertices = new Point2[size]{
+    //     {4, 4},
+    //     {-4, 4},
+    //     {-4, -4},
+    //     {4, -4}
+    // };
+    // PolygonCollider p1{vertices, size};
+    // cout << p1.toString() << endl;
+}
+
+int main() {
+
+//STRUCTS
+    //Point2 Tests
+    // PointConstructorTest();
+    // PointOverloadOperatorTest();
+
+    //Vector2 Tests
+    // VectorConstructorTest();
+    // VectorOverloadOperatorTest();
+
+
+//CLASSES
+    // Transform Tests
+    // TransformConstructorTest();
+    // TransformGetterAndSettersTest();
+    // TransformBehaviorTest();
+    
+    // CircleCollider Tests
+    // CircleColliderConstructorTest();
+    
+    // PolygonCollider Tests
+    // PolygonColliderConstructorTest();
+
+    Point2 point{1,1};
+    Transform t{point};
+
+    PolygonCollider p{};
+    CircleCollider c{};
+
+    Entity e{t, &c};
+
+    json j = e.serialize();
+
+    cout << j.dump(4);
 }

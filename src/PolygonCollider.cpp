@@ -51,6 +51,20 @@ std::string PolygonCollider::toString() const {
     return output;
 }
 
+json PolygonCollider::serialize() const {
+    
+    json j;
+
+    j["type"] = "polygon";
+
+    for(int i = 0; i < Size; i++){
+        j["vertices"].push_back(Vertices[i].serialize());
+    }
+
+    return j;
+
+}
+
 
 //Helper Methods
 void PolygonCollider::setRandVertices() {

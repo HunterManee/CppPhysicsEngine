@@ -17,5 +17,6 @@ class CircleCollider : public Collider {
         void function() override;
         Collider* clone() const override;
         std::string toString() const override;
-        
+        json serialize() const override;
+
 };

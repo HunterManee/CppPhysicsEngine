@@ -2,6 +2,9 @@
 
 #include <string>
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 struct Vector2; //forward declaration
 
 
@@ -21,5 +24,5 @@ struct Point2 {
     
     
     std::string toString() const;
-
+    json serialize() const;
 };

@@ -5,9 +5,9 @@
 //////////////////
 
 
-Entity::Entity() {}
+Entity::Entity(): transform{{}} {}
 Entity::Entity(const Collider* c):
-collider{c->clone()} {}
+transform{{}}, collider{c->clone()} {}
 
 Entity::Entity(const Transform& t):
 transform(t) {}
@@ -31,3 +31,17 @@ std::string Entity::toString() const {
 
     return output;
 }
+
+json Entity::serialize() const {
+    json j;
+    
+    j["transform"] = transform.serialize();
+
+    if(collider == nullptr)
+        j["collider"] = 0;
+    else
+        j["collider"] = collider->serialize();
+
+    return j;
+}
+

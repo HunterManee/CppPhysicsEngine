@@ -25,7 +25,7 @@ class PolygonCollider : public Collider{
 
         Collider* clone() const override;
         std::string toString() const override;
-
+        json serialize() const override;
 
     private: //Helper Methods
         void setRandVertices();

@@ -3,6 +3,10 @@
 #include "Transform.h"
 #include "Collider.h"
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
+
 class Entity {
     private:
         Transform transform{};
@@ -16,5 +20,5 @@ class Entity {
 
 
         std::string toString() const;
-
+        json serialize() const;
 };
