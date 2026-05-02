@@ -30,9 +30,14 @@ Size{toCopy.Size} {
     }
 }
 
-void PolygonCollider::function() {
-    std::cout << "From Polygon Collider" << std::endl;
+int PolygonCollider::getSize() {
+    return Size;
 }
+
+Point2 PolygonCollider::getVertex(int index) {
+    return Vertices[index];
+}
+
 
 Collider* PolygonCollider::clone() const{
     return new PolygonCollider(*this);
@@ -49,20 +54,6 @@ std::string PolygonCollider::toString() const {
     }
 
     return output;
-}
-
-json PolygonCollider::serialize() const {
-    
-    json j;
-
-    j["type"] = "polygon";
-
-    for(int i = 0; i < Size; i++){
-        j["vertices"].push_back(Vertices[i].serialize());
-    }
-
-    return j;
-
 }
 
 

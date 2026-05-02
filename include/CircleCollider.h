@@ -14,9 +14,10 @@ class CircleCollider : public Collider {
         CircleCollider(double radius);
         CircleCollider(const CircleCollider& toCopy);
 
-        void function() override;
+        double getRadius() const;
+        void setRadius(double radius);
+
         Collider* clone() const override;
         std::string toString() const override;
-        json serialize() const override;
 
 };

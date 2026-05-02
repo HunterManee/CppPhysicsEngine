@@ -44,5 +44,4 @@ class Transform
     //////////////////////
 
         std::string toString() const;
-        json serialize() const;
 };

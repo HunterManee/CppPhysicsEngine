@@ -3,9 +3,6 @@
 #include <cmath>
 using namespace std;
 
-#include <nlohmann/json.hpp>
-using json = nlohmann::json;
-
 #include "Point2.h"
 #include "Vector2.h"
 #include "Transform.h"
@@ -14,6 +11,8 @@ using json = nlohmann::json;
 #include "PolygonCollider.h"
 
 #include "Entity.h"
+
+#include "JSonOutput.h"
 
 //Structs
 //--Point2--------------------------------
@@ -95,10 +94,12 @@ void TransformGetterAndSettersTest() {
     
     Transform t{};
     cout << t.toString();
-    //cout << "========= Setters ============\n";
+
+    cout << "========= Setters ============\n";
     t.setPosition(Point2{2,2});
     t.setRotation(3.1415);
-    t.setScale(Point2(-1,-1));    
+    t.setScale(Point2(-1,-1));   
+
     cout << "========= Getters ============\n";
     cout << "Position: " << t.getPosition().toString() << "\n";
     cout << "Rotation: " << to_string(t.getRotation()) << " Rads\n";
@@ -158,24 +159,31 @@ void EntityColliderConstructorTest() {
 
 }
 
+//--JSon Output---------------------------
+void JSonOutputTest() {
 
-//--System Output-------------------------
-void SystemOutputTest() {
-    //Serialize
+    JSonOutput jsonOutput;
+
+    //Output Point Test
+    // Point2 point;
+    // jsonOutput.outputPoint(point);
+
+    //Output Transform Test
+    // Transform transform;
+    // jsonOutput.outputTransform(transform);
+
+    //Output CirlceCollider Test
+    // Collider* collider = new CircleCollider();
+    // Collider* collider = new PolygonCollider();
+    // jsonOutput.outputCollider(collider);
+
+    //Output Enity Test
     Transform t{};
-    PolygonCollider p{};
-    CircleCollider c{};
-    Entity e{t, &p};
-    json j = e.serialize();
-    cout << j.dump(4);
-    ofstream file("data.json");
-    
-    if(!file){
-        cerr << "Failed to open file\n";
-        return;
-    }
+    Collider* collider = new PolygonCollider{};
+    Entity entity{0, t, collider};
+    delete collider;
+    jsonOutput.outputEntity(entity);
 
-    file << j.dump(4);
 }
 
 int main() {
@@ -202,6 +210,8 @@ int main() {
     // PolygonCollider Tests
     // PolygonColliderConstructorTest();
 
-    SystemOutputTest();
+    // JSon Output Tests
+    JSonOutputTest();
+
 
 }

@@ -1,6 +1,7 @@
 #include "CircleCollider.h"
 #include <iostream>
 
+//Constructors
 
 CircleCollider::CircleCollider(){
     Radius = Random::getRandomDouble(MinRandRadius, MaxRandRadius);
@@ -15,9 +16,17 @@ CircleCollider::CircleCollider(const CircleCollider& toCopy) {
     *this = toCopy;
 }
 
-void CircleCollider::function() {
-    std::cout << "From Circle Collider" << std::endl;
-} 
+//Getters and Setters
+
+double CircleCollider::getRadius() const{
+    return Radius;
+}
+
+void CircleCollider::setRadius(double radius) {
+    Radius = radius;
+}
+
+//Expected Variables
 
 Collider* CircleCollider::clone() const{
     return new CircleCollider(*this);
@@ -30,13 +39,4 @@ std::string CircleCollider::toString() const {
     output += "  L--> Radius: " + std::to_string(Radius);
 
     return output;
-}
-
-json CircleCollider::serialize() const {
-    json j;
-
-    j["type"] = "circle";
-    j["radius"] = Radius;
-
-    return j;
 }

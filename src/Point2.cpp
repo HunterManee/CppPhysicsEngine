@@ -27,13 +27,6 @@ Vector2 Point2::operator-(const Point2& from) const{
 std::string Point2::toString() const {
     return "(" + std::to_string(X) +" ,"+ std::to_string(Y) + " )";
 }
-json Point2::serialize() const {
-    json j;
-    j = {
-        {"x", X},
-        {"y", Y}
-    };
-    return j;
-}
+
 
 

@@ -20,12 +20,11 @@ class PolygonCollider : public Collider{
         //Copy Constructor
         PolygonCollider(const PolygonCollider& toCopy);
 
-        void function() override;
-        void addElement(const Point2& entry);
+        int getSize();
+        Point2 getVertex(int index);
 
         Collider* clone() const override;
         std::string toString() const override;
-        json serialize() const override;
 
     private: //Helper Methods
         void setRandVertices();

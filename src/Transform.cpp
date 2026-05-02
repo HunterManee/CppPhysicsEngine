@@ -62,12 +62,3 @@ std::string Transform::toString() const{
     return output;
 }
 
-json Transform::serialize() const {
-    json j;
-
-    j["position"]   = Position.serialize();
-    j["rotation"]   = Rotation;
-    j["scale"]      = Scale.serialize();
-
-    return j;
-}

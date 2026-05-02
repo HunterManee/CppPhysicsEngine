@@ -24,5 +24,4 @@ struct Point2 {
     
     
     std::string toString() const;
-    json serialize() const;
 };
