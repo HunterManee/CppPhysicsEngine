@@ -1,5 +1,5 @@
 @echo off
-g++ src/*.cpp -Iinclude -o build/engine.exe
+g++ src/*.cpp -Iinclude -o engine.exe
 
 if %errorlevel% neq 0 (
     echo Build failed.
@@ -11,4 +11,4 @@ echo Build successful!
 echo Running program...
 echo.
 
-build\engine.exe
+engine.exe
