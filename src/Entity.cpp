@@ -5,14 +5,14 @@
 //////////////////
 
 
-Entity::Entity(int id): ID{id}, transform{{}} {}
-Entity::Entity(int id, const Collider* c):
-ID{id}, transform{{}}, collider{c->clone()} {}
+Entity::Entity(): transform{{}} {}
+Entity::Entity(const Collider* c):
+transform{{}}, collider{c->clone()} {}
 
-Entity::Entity(int id,const Transform& t):
-ID{id}, transform(t) {}
-Entity::Entity(int id, const Transform& t, const Collider* c):
-ID{id}, transform(t), collider{c->clone()} {}
+Entity::Entity(const Transform& t):
+transform(t) {}
+Entity::Entity(const Transform& t, const Collider* c):
+transform(t), collider{c->clone()} {}
 
 /////////////////////////
 // Getters and Setters //

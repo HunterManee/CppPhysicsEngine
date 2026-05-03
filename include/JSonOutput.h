@@ -27,12 +27,15 @@ class JSonOutput {
     void outputTransform(const Transform& transform);
     void outputCollider(Collider* collider);
     void outputEntity(const Entity& entity);
+    void outputEntities(const Entity entities[], int totalEntities);
 
     private: //Private Helpers
+    void outputJSon(const json j);
     json serializePoint(const Point2& point);
     json serializeTransform(const Transform& Transform);
     json serializeCollider(Collider* collider);
     json serializeEntity(Entity entity);
+    json serializeEntities(const Entity entities[], int totalEntities);
 
 
 };

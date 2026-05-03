@@ -6,16 +6,15 @@
 
 class Entity {
     private:
-        int ID;
         Transform transform{};
         Collider* collider{nullptr};
 
     public:
-        Entity(int id);
-        Entity(int id, const Collider* c);
+        Entity();
+        Entity(const Collider* c);
 
-        Entity(int id, const Transform& t);
-        Entity(int id, const Transform& t, const Collider* c);
+        Entity(const Transform& t);
+        Entity(const Transform& t, const Collider* c);
 
         Transform getTransform() const;
         Collider* getCollider() const;

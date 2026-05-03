@@ -164,25 +164,55 @@ void JSonOutputTest() {
 
     JSonOutput jsonOutput;
 
-    //Output Point Test
+    // Output Point Test
     // Point2 point;
     // jsonOutput.outputPoint(point);
 
-    //Output Transform Test
+    // Output Transform Test
     // Transform transform;
     // jsonOutput.outputTransform(transform);
 
-    //Output CirlceCollider Test
+    // Output CirlceCollider Test
     // Collider* collider = new CircleCollider();
     // Collider* collider = new PolygonCollider();
     // jsonOutput.outputCollider(collider);
 
-    //Output Enity Test
-    Transform t{};
-    Collider* collider = new PolygonCollider{};
-    Entity entity{0, t, collider};
-    delete collider;
-    jsonOutput.outputEntity(entity);
+    // Output Entity Test
+    // Transform t{};
+    // Collider* collider = new CircleCollider{};
+    // Entity entity{t, collider};
+    // delete collider;
+    // jsonOutput.outputEntity(entity);
+    
+    // Output Entities Test
+    int totalEntities = Random::getRandomInt(5, 10);
+    Entity* entities = new Entity[totalEntities];
+    for(int i = 0; i < totalEntities; i++) {
+        Point2 randPosition = {
+            Random::getRandomDouble(-400, 400),
+            Random::getRandomDouble(-300, 300)
+        };
+        Transform transform{randPosition};
+
+        Collider* collider;
+        switch (Random::getRandomInt(0,1))
+        {
+        case 0:
+            collider = new CircleCollider();
+            break;
+        case 1:
+            collider = new PolygonCollider();
+            break;
+        default:
+            cout << "Invalid Shape" << endl;
+            break;
+        }
+
+        entities[i] = Entity{transform, collider};
+    }
+
+    jsonOutput.outputEntities(entities, totalEntities);
+
 
 }
 

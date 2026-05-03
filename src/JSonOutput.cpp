@@ -5,44 +5,32 @@
 
 void JSonOutput::outputPoint(const Point2& point) {
     json j = serializePoint(point);
-
-    std::ofstream file(FileName);
-
-    if(!file) {
-        std::cerr << "Failed to open file\n";
-    }
-
-    file << j.dump(4);
+    outputJSon(j);
 }
 
 void JSonOutput::outputTransform(const Transform& transform) {
     json j = serializeTransform(transform);
-
-    std::ofstream file(FileName);
-
-    if(!file) {
-        std::cerr << "Failed to open file\n";
-    }
-    
-    file << j.dump(4);
-
+    outputJSon(j);
 }
 
 void JSonOutput::outputCollider(Collider* collider) {
     json j = serializeCollider(collider);
-
-    std::ofstream file(FileName);
-
-    if(!file) {
-        std::cerr << "Failed to open file\n";
-    }
-    
-    file << j.dump(4);
+    outputJSon(j);
 }
 
 void JSonOutput::outputEntity(const Entity& entity) {
     json j = serializeEntity(entity);
+    outputJSon(j);
+}
 
+void JSonOutput::outputEntities(const Entity entities[], int totalEntities){
+    json j = serializeEntities(entities, totalEntities);
+    outputJSon(j);
+}
+
+// Private Helper Methods
+
+void JSonOutput::outputJSon(const json j) {
     std::ofstream file(FileName);
 
     if(!file) {
@@ -105,3 +93,14 @@ json JSonOutput::serializeEntity(Entity entity) {
     delete c;
     return j;
 }
+
+json JSonOutput::serializeEntities(const Entity entities[], int totalEntities) {
+    json j = json::array();
+
+    for(int i = 0; i < totalEntities; i++) {
+        j.push_back(serializeEntity(entities[i]));
+    }
+
+    return j;
+}
+

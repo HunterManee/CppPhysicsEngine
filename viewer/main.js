@@ -24,7 +24,9 @@ function transformPoint(p, t) {
   };
 }
 
-function drawPolygon(vertices, transform) {
+function drawPolygon(transform, vertices) {
+    ctx.save()
+
     ctx.beginPath();
 
     for (let i = 0; i < vertices.length; i++) {
@@ -39,10 +41,14 @@ function drawPolygon(vertices, transform) {
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
     ctx.stroke();
+
+    ctx.restore() 
 }
 
 
 function drawCircle(transform, radius) {
+    ctx.save()
+
     ctx.beginPath();
 
     ctx.arc(
@@ -56,11 +62,12 @@ function drawCircle(transform, radius) {
     ctx.strokeStyle = "black";
     ctx.lineWidth = 2;
     ctx.stroke();
+
+    ctx.restore()
 }
 
 async function main() {
     const data = await loadData();
-
     console.log(data);
 
     // reset transform
@@ -71,12 +78,16 @@ async function main() {
     ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.scale(1, -1);
 
-    if (data.collider.type === "polygon") {
-        drawPolygon(data.collider.vertices, data.transform);
-    }
-    else if(data.collider.type === "circle") {
-        drawCircle(data.transform, data.collider.radius)
-    }
+    data.forEach(entity => {
+        if (entity.collider.type === "polygon") {
+            drawPolygon(entity.transform, entity.collider.vertices);
+        }
+        else if(entity.collider.type === "circle") {
+            drawCircle(entity.transform, entity.collider.radius)
+        }
+    });
+
+
 }
 
 main();
