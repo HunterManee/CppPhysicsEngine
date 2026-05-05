@@ -36,8 +36,10 @@ void JSonOutput::outputJSon(const json j) {
     if(!file) {
         std::cerr << "Failed to open file\n";
     }
-    
-    file << j.dump(4);
+    // j.dump(4) makes human readable
+    // j.dump() one json per line
+    // may look into binary transfer later
+    std::cout << j.dump() << std::endl; //std::endl flushes output
 }
 
 

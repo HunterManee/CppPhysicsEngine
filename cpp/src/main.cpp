@@ -1,6 +1,9 @@
-#include <iostream>
 #include <fstream>
 #include <cmath>
+#include <chrono>
+#include <thread>
+#include <iostream>
+
 using namespace std;
 
 #include "engine/Point2.h"
@@ -241,7 +244,55 @@ int main() {
     // PolygonColliderConstructorTest();
 
     // JSon Output Tests
-    JSonOutputTest();
+    // JSonOutputTest();
+
+    //Server Test
+    JSonOutput jsonOutput;
+
+    int totalEntities = Random::getRandomInt(5, 10);
+    Entity* entities = new Entity[totalEntities];
+    for(int i = 0; i < totalEntities; i++) {
+        Point2 randPosition = {
+            Random::getRandomDouble(-400, 400),
+            Random::getRandomDouble(-300, 300)
+        };
+        Transform transform{randPosition};
+
+        Collider* collider;
+        switch (Random::getRandomInt(0,1))
+        {
+        case 0:
+            collider = new CircleCollider();
+            break;
+        case 1:
+            collider = new PolygonCollider();
+            break;
+        default:
+            cout << "Invalid Shape" << endl;
+            break;
+        }
+
+        entities[i] = Entity{transform, collider};
+    }
+
+    const std::chrono::milliseconds frameTime(16); //~60 FPS
+
+    // --- MAIN LOOP ---
+    while(true) {
+        auto start = std::chrono::steady_clock::now();
+
+        // --- OUTPUT JSON ---
+        jsonOutput.outputEntities(entities, totalEntities);
+
+        // IMPORTANT: ensure newline + flush inside outputEntities !
+
+        // --- FRAME TIMING ---
+        auto elapsed = std::chrono::steady_clock::now() - start;
+        if (elapsed < frameTime) {
+            std::this_thread::sleep_for(frameTime - elapsed);
+        }
+
+    }
 
 
 }

@@ -1,0 +1,51 @@
+const { spawn } = require('child_process');
+const WebSocket = require('ws');
+const path = require('path');
+
+const wss = new WebSocket.Server({ port: 9001 });
+
+console.log("WebSocket server running on we://localhost:9001");
+
+wss.on('connection', (ws) => {
+    console.log("Client connected");
+
+    // Path to compiled c++ program
+    const simPath = path.join(__dirname, '../cpp/build/sim');
+
+    const cpp = spawn(simPath);
+
+    // C++ -> Browser
+    let buffer = ""
+    cpp.stdout.on('data', (data) => {
+        buffer += data.toString();
+
+        let newlineIndex;
+
+        while ((newlineIndex = buffer.indexOf('\n')) !== -1) {
+            const line = buffer.slice(0, newlineIndex);
+            buffer = buffer.slice(newlineIndex + 1);
+
+            if (!line.trim()) continue;
+
+            try {
+                const obj = JSON.parse(line);
+                ws.send(JSON.stringify(obj));
+            }catch(err) {
+                console.error("Bad JSON line:", line);
+            }
+        }
+
+    });
+
+    //Handle errors
+    cpp.stderr.on('data', (err) => {
+        console.error("C++ error:", err.toString());
+    });
+
+    // Clearnup when client disconnects
+    ws.on('close', () => {
+        cpp.kill();
+        console.log("Client disconnected");
+    });
+});
+

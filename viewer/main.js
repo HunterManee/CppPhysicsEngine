@@ -1,11 +1,34 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+let currentData = []; // latest state from server
 
-async function loadData() {
-    const response = await fetch("../data/data.json");
-    return await response.json();
-}
+// --- WebSocket connection --
+const socket = new WebSocket("ws://localhost:9001");
+
+socket.onopen = () => {
+    console.log("Connected to server");
+};
+
+socket.onmessage = (event) => {
+    try {
+        // console.log("RAW:", event.data)
+        currentData = JSON.parse(event.data);
+        // console.log("Parse:", currentData)
+
+    } catch (e) {
+        console.error("Invalid JSON:", event.data);
+    }
+};
+
+socket.onclose = () => {
+    console.log("Disconnected from server");
+};
+
+// async function loadData() {
+//     const response = await fetch("../data/data.json");
+//     return await response.json();
+// }
 
 function transformPoint(p, t) {
   let x = p.x * t.scale.x;
@@ -66,10 +89,10 @@ function drawCircle(transform, radius) {
     ctx.restore()
 }
 
-async function main() {
-    const data = await loadData();
-    console.log(data);
-
+async function render() {
+    // const data = await loadData();
+    // console.log(data);
+    console.log(currentData);
     // reset transform
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -78,7 +101,7 @@ async function main() {
     ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.scale(1, -1);
 
-    data.forEach(entity => {
+    currentData.forEach(entity => {
         if (entity.collider.type === "polygon") {
             drawPolygon(entity.transform, entity.collider.vertices);
         }
@@ -87,7 +110,7 @@ async function main() {
         }
     });
 
-
+    requestAnimationFrame(render);
 }
 
-main();
+render();
