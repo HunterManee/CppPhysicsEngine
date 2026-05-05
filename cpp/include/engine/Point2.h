@@ -2,9 +2,6 @@
 
 #include <string>
 
-#include <nlohmann/json.hpp>
-using json = nlohmann::json;
-
 struct Vector2; //forward declaration
 
 

@@ -1,4 +1,4 @@
-#include <nlohmann/json.hpp>
+#include <external\nlohmann\json.hpp>
 using json = nlohmann::json;
 
 #include <fstream>
@@ -15,7 +15,7 @@ using json = nlohmann::json;
 
 class JSonOutput {
 
-    std::string FileName{"data.json"};
+    std::string FileName{"../data/data.json"};
 
     public:
     // Constructors

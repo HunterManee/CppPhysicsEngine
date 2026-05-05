@@ -3,16 +3,16 @@
 #include <cmath>
 using namespace std;
 
-#include "Point2.h"
-#include "Vector2.h"
-#include "Transform.h"
+#include "engine/Point2.h"
+#include "engine/Vector2.h"
+#include "engine/Transform.h"
 
-#include "CircleCollider.h"
-#include "PolygonCollider.h"
+#include "engine/CircleCollider.h"
+#include "engine/PolygonCollider.h"
 
-#include "Entity.h"
+#include "engine/Entity.h"
 
-#include "JSonOutput.h"
+#include "engine/JSonOutput.h"
 
 //Structs
 //--Point2--------------------------------

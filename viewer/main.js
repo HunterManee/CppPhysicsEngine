@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 
 
 async function loadData() {
-    const response = await fetch("../data.json");
+    const response = await fetch("../data/data.json");
     return await response.json();
 }
 

@@ -1,9 +1,6 @@
 #pragma once
 #include "Point2.h"
 
-#include <nlohmann/json.hpp>
-using json = nlohmann::json;
-
 class Transform
 {
     private:

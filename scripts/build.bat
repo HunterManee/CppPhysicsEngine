@@ -1,5 +1,8 @@
 @echo off
-g++ src/*.cpp -Iinclude -o engine.exe
+
+cd /d %~dp0\..\cpp
+
+g++ src/*.cpp -Iinclude -Iinclude/external -o build/sim.exe
 
 if %errorlevel% neq 0 (
     echo Build failed.
@@ -11,4 +14,6 @@ echo Build successful!
 echo Running program...
 echo.
 
-engine.exe
+build\sim.exe
+
+cd /d %~dp0\..\scripts
