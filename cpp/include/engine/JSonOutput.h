@@ -1,4 +1,4 @@
-#include <external\nlohmann\json.hpp>
+#include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
 #include <fstream>

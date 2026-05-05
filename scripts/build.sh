@@ -10,7 +10,7 @@ cd "$(dirname "$0")/../cpp"
 mkdir -p build
 
 # Compile (clang is default on macOS)
-clang++ src/*.cpp -Iinclude -Iinclude/external -std=c++17 -O2 -o build/engine
+clang++ src/*.cpp -Iinclude -Iinclude/external -std=c++17 -O2 -o build/sim
 
 echo
 echo "Build successful!"
@@ -18,4 +18,4 @@ echo "Running program..."
 echo
 
 # Run
-./build/engine
+./build/sim
