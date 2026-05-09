@@ -28,8 +28,7 @@ wss.on('connection', (ws) => {
             if (!line.trim()) continue;
 
             try {
-                const obj = JSON.parse(line);
-                ws.send(JSON.stringify(obj));
+                ws.send(line);
             }catch(err) {
                 console.error("Bad JSON line:", line);
             }

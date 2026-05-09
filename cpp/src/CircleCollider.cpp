@@ -26,8 +26,11 @@ void CircleCollider::setRadius(double radius) {
     Radius = radius;
 }
 
-//Expected Variables
+std::string CircleCollider::getShape() const {
+    return "circle";
+}
 
+//Expected Variables
 Collider* CircleCollider::clone() const{
     return new CircleCollider(*this);
 }

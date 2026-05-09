@@ -1,7 +1,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-let currentData = []; // latest state from server
+const entities = new Map();
 
 // --- WebSocket connection --
 const socket = new WebSocket("ws://localhost:9001");
@@ -12,10 +12,11 @@ socket.onopen = () => {
 
 socket.onmessage = (event) => {
     try {
-        // console.log("RAW:", event.data)
-        currentData = JSON.parse(event.data);
-        // console.log("Parse:", currentData)
-
+        const currentData = JSON.parse(event.data);
+        if(currentData.type === "spawn") {
+            const data = currentData.data;
+            entities.set(data.id, data);
+        }
     } catch (e) {
         console.error("Invalid JSON:", event.data);
     }
@@ -25,16 +26,13 @@ socket.onclose = () => {
     console.log("Disconnected from server");
 };
 
-// async function loadData() {
-//     const response = await fetch("../data/data.json");
-//     return await response.json();
-// }
 
-function transformPoint(p, t) {
-  let x = p.x * t.scale.x;
-  let y = p.y * t.scale.y;
+// --- Draw Shapes -------------
+function transformPoint(vertex, data) {
+  let x = vertex.x * data.scale[0];
+  let y = vertex.y * data.scale[1];
 
-  const rad = t.rotation;
+  const rad = data.rotation;
   const cos = Math.cos(rad);
   const sin = Math.sin(rad);
 
@@ -42,18 +40,18 @@ function transformPoint(p, t) {
   const ry = x * sin + y * cos;
 
   return {
-    x: rx + t.position.x,
-    y: ry + t.position.y
+    x: rx + data.position[0],
+    y: ry + data.position[1]
   };
 }
 
-function drawPolygon(transform, vertices) {
+function drawPolygon(data) {
     ctx.save()
 
     ctx.beginPath();
 
-    for (let i = 0; i < vertices.length; i++) {
-        const v = transformPoint(vertices[i], transform);
+    for (let i = 0; i < data.vertices.length; i++) {
+        const v = transformPoint(data.vertices[i], data);
 
         if (i === 0) ctx.moveTo(v.x, v.y);
         else ctx.lineTo(v.x, v.y);
@@ -69,15 +67,15 @@ function drawPolygon(transform, vertices) {
 }
 
 
-function drawCircle(transform, radius) {
+function drawCircle(data) {
     ctx.save()
 
     ctx.beginPath();
 
     ctx.arc(
-        transform.position.x,
-        transform.position.y,
-        radius * transform.scale.x, // optional scaling
+        data.position.x,
+        data.position.y,
+        data.radius * data.scale.x, // optional scaling
         0,
         Math.PI * 2
     );
@@ -90,9 +88,7 @@ function drawCircle(transform, radius) {
 }
 
 async function render() {
-    // const data = await loadData();
-    // console.log(data);
-    console.log(currentData);
+
     // reset transform
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -101,14 +97,15 @@ async function render() {
     ctx.translate(canvas.width / 2, canvas.height / 2);
     ctx.scale(1, -1);
 
-    currentData.forEach(entity => {
-        if (entity.collider.type === "polygon") {
-            drawPolygon(entity.transform, entity.collider.vertices);
+
+    entities.forEach(entity => {
+        if (entity.shape === "polygon") {
+            drawPolygon(entity);
         }
-        else if(entity.collider.type === "circle") {
-            drawCircle(entity.transform, entity.collider.radius)
+        else if(entity.shape === "circle") {
+            drawCircle(entity)
         }
-    });
+    })
 
     requestAnimationFrame(render);
 }

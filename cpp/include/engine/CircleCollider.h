@@ -16,7 +16,8 @@ class CircleCollider : public Collider {
 
         double getRadius() const;
         void setRadius(double radius);
-
+        
+        std::string getShape() const override;
         Collider* clone() const override;
         std::string toString() const override;
 

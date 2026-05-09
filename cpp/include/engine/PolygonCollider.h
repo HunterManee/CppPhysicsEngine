@@ -2,11 +2,11 @@
 
 #include "Collider.h"
 #include "Point2.h"
+#include <vector>
 
 class PolygonCollider : public Collider{
     private:
-        Point2* Vertices{nullptr};
-        int Size{0};
+        std::vector<Point2> Vertices;
 
         const int Min_Vertices{3};
         const int Max_Vertices{8};
@@ -14,7 +14,7 @@ class PolygonCollider : public Collider{
     public:
         //Constructor
         PolygonCollider();
-        PolygonCollider(const Point2 vertices[], int size);
+        PolygonCollider(const std::vector<Point2> vertices);
         //Destructor
         ~PolygonCollider() override;
         //Copy Constructor
@@ -23,6 +23,7 @@ class PolygonCollider : public Collider{
         int getSize();
         Point2 getVertex(int index);
 
+        std::string getShape() const override;
         Collider* clone() const override;
         std::string toString() const override;
 

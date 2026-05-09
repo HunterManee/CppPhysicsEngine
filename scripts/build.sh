@@ -14,8 +14,10 @@ clang++ src/*.cpp -Iinclude -Iinclude/external -std=c++17 -O2 -o build/sim
 
 echo
 echo "Build successful!"
-echo "Running program..."
-echo
 
-# Run
-./build/sim
+# Run Script
+# ../cpp/build/sim
+
+# Activate Server
+node ../node/server.js
+

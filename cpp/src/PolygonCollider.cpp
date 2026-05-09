@@ -8,36 +8,33 @@
 PolygonCollider::PolygonCollider(){
     setRandVertices();
 }
-PolygonCollider::PolygonCollider(const Point2 vertices[], int size):
-Size{size} {
-    Vertices = new Point2[Size];
-    for(int i = 0; i < Size; i++) {
-        Vertices[i] = vertices[i];
+PolygonCollider::PolygonCollider(const std::vector<Point2> vertices)
+{
+    for(Point2 vertex : vertices) {
+        Vertices.push_back(vertex);
     }
 }
 //Destructor
-PolygonCollider::~PolygonCollider() {
-    delete[] Vertices;
-    Vertices = nullptr;
-    Size = 0;
-}
+PolygonCollider::~PolygonCollider() {}
+
 //Copy Constructor
-PolygonCollider::PolygonCollider(const PolygonCollider& toCopy):
-Size{toCopy.Size} {
-    Vertices = new Point2[Size];
-    for(int i = 0; i < Size; i++) {
-        Vertices[i] = toCopy.Vertices[i];
+PolygonCollider::PolygonCollider(const PolygonCollider& toCopy) {
+    for(Point2 vertex : toCopy.Vertices) {
+        Vertices.push_back(vertex);
     }
 }
 
 int PolygonCollider::getSize() {
-    return Size;
+    return Vertices.size();
 }
 
 Point2 PolygonCollider::getVertex(int index) {
     return Vertices[index];
 }
 
+std::string PolygonCollider::getShape() const {
+    return "polygon";
+}
 
 Collider* PolygonCollider::clone() const{
     return new PolygonCollider(*this);
@@ -47,10 +44,10 @@ std::string PolygonCollider::toString() const {
     std::string output;
 
     output += "--PolygonCollider--------------------\n";
-    output += "--L--> Size: " + std::to_string(Size) + "\n";
+    output += "--L--> Size: " + std::to_string(Vertices.size()) + "\n";
     output += "  L--> Vertices:\n";
-    for(int i = 0; i < Size; i++) {
-    output += "       L--> " + Vertices[i].toString() + "\n"; 
+    for(Point2 vertex : Vertices) {
+        output += "       L--> " + vertex.toString() + "\n"; 
     }
 
     return output;
@@ -62,7 +59,6 @@ void PolygonCollider::setRandVertices() {
 
     //Choose a random number of vertices bewteen the min and max
     int totalVertices = Random::getRandomInt(Min_Vertices, Max_Vertices);
-    Size = totalVertices;
 
     //Create the range for the change in degree
     const double TAU = 6.283185307179586;
@@ -73,7 +69,6 @@ void PolygonCollider::setRandVertices() {
     //Create the max for the range for magnitude
     const double MAX_MAGNITUDE = Random::getRandomDouble(CircleCollider::MinRandRadius, CircleCollider::MaxRandRadius);
 
-    Vertices = new Point2[totalVertices];
     Point2 centroid{};
     for(int i = 0; i < totalVertices; i++) {
 
@@ -85,7 +80,7 @@ void PolygonCollider::setRandVertices() {
         Vector2 vector{magnitude, radians};
         Point2 newVertex{vector.getDeltaX(), vector.getDeltaY()};
 
-        Vertices[i] = newVertex;
+        Vertices.push_back(newVertex);
 
         centroid.X += newVertex.X;
         centroid.Y += newVertex.Y;
