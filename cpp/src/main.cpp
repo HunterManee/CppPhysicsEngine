@@ -16,19 +16,31 @@ using namespace std;
 #include "engine/WebsocketOutput.hpp"
 
 
-int maxEntities = 10;
+int maxEntities = 1;
 int entitiesCreated = 0;
 
 void createValidation() {
        while(WebsocketOutput::getEntitiesSize() < maxEntities) {
-            Point2 randPosition = {
-                Random::getRandomDouble(-400, 400),
-                Random::getRandomDouble(-300, 300)
+            Vector randPosition = {
+                Random::getRandomFloat(-400, 400),
+                Random::getRandomFloat(-300, 300)
             }; 
-            Transform t{randPosition};
+            Transform transform{randPosition};
 
-            Collider* collider = new PolygonCollider();
-            Entity entity{entitiesCreated, t, collider};
+            Collider* collider;
+            switch(0) {
+                case 0:
+                    collider = new PolygonCollider{};
+                    break;
+                case 1:
+                    collider = new CircleCollider{};
+                    break;
+            }
+
+            Vector velocity{0, -9.80};
+            Rigidbody rigidbody{velocity};
+
+            Entity entity{entitiesCreated, transform, collider, &rigidbody};
             
             delete collider;
             collider = nullptr;
@@ -36,6 +48,12 @@ void createValidation() {
             WebsocketOutput::spawnEntity(entity);
             
             entitiesCreated++;
+        }
+}
+
+void updateFalling() {
+        for(int i = 0; i < WebsocketOutput::getEntitiesSize(); i++) {
+
         }
 }
 
@@ -51,7 +69,6 @@ int main() {
 
         // --- OUTPUT JSON ---
         createValidation();
-        // IMPORTANT: ensure newline + flush inside outputEntities !
 
         // --- FRAME TIMING ---
         auto elapsed = std::chrono::steady_clock::now() - start;

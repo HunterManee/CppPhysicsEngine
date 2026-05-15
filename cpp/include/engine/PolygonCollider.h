@@ -1,12 +1,13 @@
 #pragma once
+#include <vector>
 
 #include "Collider.h"
-#include "Point2.h"
-#include <vector>
+#include "Vector.hpp"
+
 
 class PolygonCollider : public Collider{
     private:
-        std::vector<Point2> Vertices;
+        std::vector<Vector> Vertices;
 
         const int Min_Vertices{3};
         const int Max_Vertices{8};
@@ -14,14 +15,14 @@ class PolygonCollider : public Collider{
     public:
         //Constructor
         PolygonCollider();
-        PolygonCollider(const std::vector<Point2> vertices);
+        PolygonCollider(const std::vector<Vector> vertices);
         //Destructor
         ~PolygonCollider() override;
         //Copy Constructor
         PolygonCollider(const PolygonCollider& toCopy);
 
         int getSize();
-        Point2 getVertex(int index);
+        Vector getVertex(int index);
 
         std::string getShape() const override;
         Collider* clone() const override;

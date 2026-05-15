@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-#include "Random.h"
+#include "Random.hpp"
 
 class Collider{
     public: 

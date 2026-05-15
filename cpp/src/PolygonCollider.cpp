@@ -2,15 +2,15 @@
 #include <iostream>
 
 #include "engine/CircleCollider.h"
-#include "engine/Vector2.h"
+#include "engine/Vector.hpp"
 
 //Constructor
 PolygonCollider::PolygonCollider(){
     setRandVertices();
 }
-PolygonCollider::PolygonCollider(const std::vector<Point2> vertices)
+PolygonCollider::PolygonCollider(const std::vector<Vector> vertices)
 {
-    for(Point2 vertex : vertices) {
+    for(Vector vertex : vertices) {
         Vertices.push_back(vertex);
     }
 }
@@ -19,7 +19,7 @@ PolygonCollider::~PolygonCollider() {}
 
 //Copy Constructor
 PolygonCollider::PolygonCollider(const PolygonCollider& toCopy) {
-    for(Point2 vertex : toCopy.Vertices) {
+    for(Vector vertex : toCopy.Vertices) {
         Vertices.push_back(vertex);
     }
 }
@@ -28,7 +28,7 @@ int PolygonCollider::getSize() {
     return Vertices.size();
 }
 
-Point2 PolygonCollider::getVertex(int index) {
+Vector PolygonCollider::getVertex(int index) {
     return Vertices[index];
 }
 
@@ -46,8 +46,8 @@ std::string PolygonCollider::toString() const {
     output += "--PolygonCollider--------------------\n";
     output += "--L--> Size: " + std::to_string(Vertices.size()) + "\n";
     output += "  L--> Vertices:\n";
-    for(Point2 vertex : Vertices) {
-        output += "       L--> " + vertex.toString() + "\n"; 
+    for(Vector vertex : Vertices) {
+        output += "       L--> " + vertex.to_string() + "\n"; 
     }
 
     return output;
@@ -69,30 +69,27 @@ void PolygonCollider::setRandVertices() {
     //Create the max for the range for magnitude
     const double MAX_MAGNITUDE = Random::getRandomDouble(CircleCollider::MinRandRadius, CircleCollider::MaxRandRadius);
 
-    Point2 centroid{};
+    Vector centroid{};
     for(int i = 0; i < totalVertices; i++) {
 
         double deltaRadians = Random::getRandomDouble(-DELTA_RADIANS, DELTA_RADIANS);
-        double radians = i * avgRadians + deltaRadians;
+        double theta = i * avgRadians + deltaRadians;
 
-        double magnitude = Random::getRandomDouble(CircleCollider::MinRandRadius, MAX_MAGNITUDE);
+        float magnitude = Random::getRandomDouble(CircleCollider::MinRandRadius, MAX_MAGNITUDE);
 
-        Vector2 vector{magnitude, radians};
-        Point2 newVertex{vector.getDeltaX(), vector.getDeltaY()};
+        Vector newVertex{magnitude, theta};
 
         Vertices.push_back(newVertex);
 
-        centroid.X += newVertex.X;
-        centroid.Y += newVertex.Y;
+        centroid = centroid + newVertex;
     }
 
     //Determine the new center of the shape
-    centroid.X /= totalVertices;
-    centroid.Y /= totalVertices;
+    centroid = centroid / totalVertices;
 
     //Ajust Points based on the center of the shape
     for (int i = 0; i < totalVertices; i++) {
-        Vertices[i].X -= centroid.X;
-        Vertices[i].Y -= centroid.Y;
+        Vertices[i] = Vertices[i] - centroid;
     }
+    
 }

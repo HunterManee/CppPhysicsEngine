@@ -39,7 +39,7 @@ std::string CircleCollider::toString() const {
     std::string output;
     
     output += "--CircleCollider---------------------\n";
-    output += "  L--> Radius: " + std::to_string(Radius);
+    output += "  L--> Radius: " + std::to_string(Radius) + "\n";
 
     return output;
 }

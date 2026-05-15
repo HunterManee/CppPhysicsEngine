@@ -6,9 +6,9 @@
 
 
 Transform::Transform() {}
-Transform::Transform(const Point2& position):
+Transform::Transform(const Vector& position):
 Position{position} {}
-Transform::Transform(const Point2& position, double rotation):
+Transform::Transform(const Vector& position, double rotation):
 Position{position}, Rotation{rotation} {}
 
 /////////////////////////
@@ -16,10 +16,10 @@ Position{position}, Rotation{rotation} {}
 /////////////////////////
 
 
-Point2 Transform::getPosition() const{
+Vector Transform::getPosition() const{
     return Position; //returns a copy
 }
-void Transform::setPosition(const Point2& position) {
+void Transform::setPosition(const Vector& position) {
     Position = position;
 }
 
@@ -30,10 +30,10 @@ void Transform::setRotation(double rotation) {
     Rotation = rotation;
 }
 
-Point2 Transform::getScale() const{
+Vector Transform::getScale() const{
     return Scale;
 }
-void Transform::setScale(const Point2& scale) {
+void Transform::setScale(const Vector& scale) {
     Scale = scale; 
 } 
 
@@ -42,7 +42,7 @@ void Transform::setScale(const Point2& scale) {
 ///////////////
 
 
-void Transform::move(const Vector2& vector) {
+void Transform::move(const Vector& vector) {
     setPosition(Position + vector);
 }
 
@@ -55,9 +55,9 @@ std::string Transform::toString() const{
     
     std::string output = "";
     output += "--Transform--------------------------\n";
-    output += "  L--> Position: " + Position.toString() + "\n";
+    output += "  L--> Position: " + Position.to_string() + "\n";
     output += "  L--> Rotation: " + std::to_string(Rotation) + " Rads\n";
-    output += "  L--> Scale:    " + Scale.toString() + "\n";
+    output += "  L--> Scale:    " + Scale.to_string() + "\n";
 
     return output;
 }

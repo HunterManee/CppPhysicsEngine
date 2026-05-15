@@ -29,8 +29,8 @@ socket.onclose = () => {
 
 // --- Draw Shapes -------------
 function transformPoint(vertex, data) {
-  let x = vertex.x * data.scale[0];
-  let y = vertex.y * data.scale[1];
+  let x = vertex.x * data.scale.x;
+  let y = vertex.y * data.scale.y;
 
   const rad = data.rotation;
   const cos = Math.cos(rad);
@@ -40,8 +40,8 @@ function transformPoint(vertex, data) {
   const ry = x * sin + y * cos;
 
   return {
-    x: rx + data.position[0],
-    y: ry + data.position[1]
+    x: rx + data.position.x,
+    y: ry + data.position.y
   };
 }
 

@@ -1,12 +1,12 @@
 #pragma once
-#include "Point2.h"
+#include "Vector.hpp"
 
 class Transform
 {
     private:
-        Point2 Position{0, 0};
+        Vector Position{(float)0, (float)0};
         double Rotation{0};
-        Point2 Scale{1,1};
+        Vector Scale{(float)1, (float)1};
     public:
 
     //////////////////
@@ -14,27 +14,27 @@ class Transform
     //////////////////
 
         Transform();
-        Transform(const Point2& position);
-        Transform(const Point2& position, double rotation);
+        Transform(const Vector& position);
+        Transform(const Vector& position, double rotation);
 
     /////////////////////////
     // Getters and Setters //
     /////////////////////////
 
-        Point2 getPosition() const;
-        void setPosition(const Point2& position);
+        Vector getPosition() const;
+        void setPosition(const Vector& position);
 
         double getRotation() const;
         void setRotation(double rotation);
 
-        Point2 getScale() const;
-        void setScale(const Point2& scale);
+        Vector getScale() const;
+        void setScale(const Vector& scale);
 
     ///////////////
     // Behaviors //
     ///////////////
 
-        void move(const Vector2& vector);
+        void move(const Vector& vector);
 
     //////////////////////
     // Expected Methods //
