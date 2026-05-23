@@ -37,7 +37,10 @@ Entity::~Entity() {
 int Entity::getID() const {
     return ID;
 }
-Transform Entity::getTransform() const{
+Transform& Entity::getTransform(){
+    return transform;
+}
+const Transform Entity::getTransform() const {
     return transform;
 }
 Collider* Entity::getCollider() const{

@@ -17,6 +17,9 @@ socket.onmessage = (event) => {
             const data = currentData.data;
             entities.set(data.id, data);
         }
+        if(currentData.type === "update") {
+            updateEntitiesMap(currentData.data);
+        }
     } catch (e) {
         console.error("Invalid JSON:", event.data);
     }
@@ -25,6 +28,21 @@ socket.onmessage = (event) => {
 socket.onclose = () => {
     console.log("Disconnected from server");
 };
+
+// --- Update Data -------------
+function updateEntitiesMap(data) {
+    data.forEach(entity => {
+        const id = entity.id;
+        for(const key in entity) {
+            if(key === "id") continue;
+            console.log(key);
+            console.log(entities.get(id)[key]);
+            console.log(entity[key]);
+
+            entities.get(id)[key] = entity[key]
+        }
+    });
+}
 
 
 // --- Draw Shapes -------------

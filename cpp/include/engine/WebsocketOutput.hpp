@@ -70,8 +70,42 @@ class WebsocketOutput{
             std::cout << j.dump() << std::endl;
             entities.push_back(entity.clone());
         }
-    
-    
+        
+        static void updateTest() {
+
+            json j;
+
+            j["type"] = "update";
+            j["data"] = json::array();
+
+            for(Entity* entity : entities) {
+                Transform& t = entity->getTransform();
+                Rigidbody* rb = entity->getRigidbody();
+
+                Vector position = t.getPosition();
+                position = position + rb->getVelocity();
+                t.setPosition(position);
+
+                j["data"].push_back({
+                    {"id", entity->getID()},
+                    {"position", {
+                        {"x", (float)(entity->getTransform().getPosition().i * 100) / 100.0},
+                        {"y", (float)(entity->getTransform().getPosition().j * 100) / 100.0}
+                    }},
+                    {"velocity", {
+                        {"x", (float)(rb->getVelocity().i * 100) / 100.0},
+                        {"y", (float)(rb->getVelocity().j * 100) / 100.0}
+                    }}
+                });
+
+                delete rb;
+                rb = nullptr;
+                
+            }
+
+            std::cout << j.dump() << std::endl;
+        }
+        
 };
 
 

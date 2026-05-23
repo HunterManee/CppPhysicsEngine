@@ -26,7 +26,8 @@ class Entity {
         ~Entity();
 
         int getID() const;
-        Transform getTransform() const;
+        Transform& getTransform();
+        const Transform getTransform() const;
         Collider* getCollider() const;
         Rigidbody* getRigidbody() const;
 

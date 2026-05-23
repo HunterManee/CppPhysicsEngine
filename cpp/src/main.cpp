@@ -16,7 +16,7 @@ using namespace std;
 #include "engine/WebsocketOutput.hpp"
 
 
-int maxEntities = 1;
+int maxEntities = 10;
 int entitiesCreated = 0;
 
 void createValidation() {
@@ -28,7 +28,7 @@ void createValidation() {
             Transform transform{randPosition};
 
             Collider* collider;
-            switch(0) {
+            switch(Random::getRandomInt(0, 1)) {
                 case 0:
                     collider = new PolygonCollider{};
                     break;
@@ -37,7 +37,7 @@ void createValidation() {
                     break;
             }
 
-            Vector velocity{0, -9.80};
+            Vector velocity{(float)0, (float)(-9.80/8)};
             Rigidbody rigidbody{velocity};
 
             Entity entity{entitiesCreated, transform, collider, &rigidbody};
@@ -52,9 +52,7 @@ void createValidation() {
 }
 
 void updateFalling() {
-        for(int i = 0; i < WebsocketOutput::getEntitiesSize(); i++) {
-
-        }
+        WebsocketOutput::updateTest();
 }
 
 
@@ -69,7 +67,7 @@ int main() {
 
         // --- OUTPUT JSON ---
         createValidation();
-
+        updateFalling();
         // --- FRAME TIMING ---
         auto elapsed = std::chrono::steady_clock::now() - start;
         if (elapsed < frameTime) {
