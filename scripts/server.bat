@@ -7,10 +7,9 @@ g++ -Iinclude -Iinclude/external src/*.cpp src/engine/*.cpp -o build/engine.exe
 
 echo.
 echo Build Successful!
-echo Running Program...
+echo Starting Server...
 echo.
 
-REM Run executable
-cd ..\scripts
-..\cpp\build\engine.exe
-
+REM start server
+cd ../scripts
+node ../node/server.js

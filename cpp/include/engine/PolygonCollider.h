@@ -1,34 +1,26 @@
 #pragma once
-#include <vector>
-
-#include "Collider.h"
+#include "vector"
 #include "Vector.hpp"
+#include "Collider.hpp"
 
-
-class PolygonCollider : public Collider{
+class PolygonCollider : public Collider {
     private:
-        std::vector<Vector> Vertices;
-
         const int Min_Vertices{3};
         const int Max_Vertices{8};
-        
+
+        std::vector<Vector> Vertices;
+    
     public:
-        //Constructor
         PolygonCollider();
-        PolygonCollider(const std::vector<Vector> vertices);
-        //Destructor
-        ~PolygonCollider() override;
-        //Copy Constructor
         PolygonCollider(const PolygonCollider& toCopy);
 
-        int getSize();
-        Vector getVertex(int index);
+        int getTotalVerticies();
+        Vector getVertex(const int index);
 
-        std::string getShape() const override;
         Collider* clone() const override;
-        std::string toString() const override;
-
-    private: //Helper Methods
+        std::string to_string() const override;
+    
+    private:
         void setRandVertices();
 
-    };
+};

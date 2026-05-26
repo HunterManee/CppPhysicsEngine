@@ -4,14 +4,15 @@ const path = require('path');
 
 const wss = new WebSocket.Server({ port: 9001 });
 
-console.log("WebSocket server running on we://localhost:9001");
+console.log("WebSocket server running on ws://localhost:9001");
 
 wss.on('connection', (ws) => {
-    console.log("Client connected");
+    console.log("Client Connected");
 
     // Path to compiled c++ program
-    const simPath = path.join(__dirname, '../cpp/build/sim');
-
+    const executable = (process.platform === 'win32')? 'engine.exe' : 'engine';
+    const simPath = path.join(__dirname, '../cpp/build', executable)
+    
     const cpp = spawn(simPath);
 
     // C++ -> Browser
@@ -46,5 +47,5 @@ wss.on('connection', (ws) => {
         cpp.kill();
         console.log("Client disconnected");
     });
+    
 });
-

@@ -1,21 +1,20 @@
+#pragma once
 #include "Vector.hpp"
 
 class Rigidbody{
 
     private:
-        Vector Velocity{};
+        Vector Velocity;
 
     public:
         Rigidbody();
-        Rigidbody(Vector velocity);
-        
+        Rigidbody(const Vector velocity);
         Rigidbody(const Rigidbody& toCopy);
 
-        Vector getVelocity();
-        void setVelocity(Vector velocity);
-
-
-        std::string to_string() const;
+        Vector getVelocity() const;
+        void setVelocity(const Vector velocity);
+        
         Rigidbody* clone() const;
-
+        std::string to_string() const;
 };
+

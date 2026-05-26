@@ -31,17 +31,12 @@ socket.onclose = () => {
 
 // --- Update Data -------------
 function updateEntitiesMap(data) {
-    data.forEach(entity => {
-        const id = entity.id;
-        for(const key in entity) {
-            if(key === "id") continue;
-            console.log(key);
-            console.log(entities.get(id)[key]);
-            console.log(entity[key]);
+    const id = data.id;
+    for(const key in data) {
+        if(key === "id") continue;
 
-            entities.get(id)[key] = entity[key]
-        }
-    });
+        entities.get(id)[key] = data[key]
+    }
 }
 
 

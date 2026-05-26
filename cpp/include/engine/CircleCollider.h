@@ -1,24 +1,20 @@
 #pragma once
-#include "Collider.h"
+#include "Collider.hpp"
 
 class CircleCollider : public Collider {
+
     private:
-        double Radius{1};
-
+        float Radius;
+    
     public:
-
-        static constexpr double MinRandRadius{50};
-        static constexpr double MaxRandRadius{100};
-
         CircleCollider();
-        CircleCollider(double radius);
+        CircleCollider(float radius);
         CircleCollider(const CircleCollider& toCopy);
 
-        double getRadius() const;
-        void setRadius(double radius);
-        
-        std::string getShape() const override;
+        float getRadius() const;
+        void setRadius(const float radius);
+
         Collider* clone() const override;
-        std::string toString() const override;
+        std::string to_string() const override;
 
 };

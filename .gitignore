@@ -1,4 +1,2 @@
-*.exe
-*.out
-data/*
 cpp/build/*
+node/node_modules/

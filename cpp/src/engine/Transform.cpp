@@ -1,29 +1,20 @@
 #include "engine/Transform.h"
 
-//////////////////
-// Constructors //
-//////////////////
-
-
-Transform::Transform() {}
+Transform::Transform():
+Position{(float)0, (float)0}, Rotation{0}, Scale{(float)1, (float)1} {}
 Transform::Transform(const Vector& position):
-Position{position} {}
+Position{position}, Rotation{0}, Scale{(float)1, (float)1} {}
 Transform::Transform(const Vector& position, double rotation):
-Position{position}, Rotation{rotation} {}
+Position{position}, Rotation{rotation}, Scale{(float)1, (float)1} {}
 
-/////////////////////////
-// Getters and Setters //
-/////////////////////////
-
-
-Vector Transform::getPosition() const{
-    return Position; //returns a copy
+Vector Transform::getPosition() const {
+    return Position;
 }
 void Transform::setPosition(const Vector& position) {
     Position = position;
 }
 
-double Transform::getRotation() const{
+double Transform::getRotation() const {
     return Rotation;
 }
 void Transform::setRotation(double rotation) {
@@ -34,25 +25,10 @@ Vector Transform::getScale() const{
     return Scale;
 }
 void Transform::setScale(const Vector& scale) {
-    Scale = scale; 
-} 
-
-///////////////
-// Behaviors //
-///////////////
-
-
-void Transform::move(const Vector& vector) {
-    setPosition(Position + vector);
+    Scale = scale;
 }
 
-//////////////////////
-// Expected Methods //
-//////////////////////
-
-
-std::string Transform::toString() const{
-    
+std::string Transform::to_string() const {
     std::string output = "";
     output += "--Transform--------------------------\n";
     output += "  L--> Position: " + Position.to_string() + "\n";
@@ -61,4 +37,3 @@ std::string Transform::toString() const{
 
     return output;
 }
-
