@@ -18,12 +18,14 @@ signed int id = 0;
 void createEntites() {
     while(entities.size() < MAX_ENTITIES) {
 
+        //Transformation
         Vector randPosition = {
             Random::getRandomFloat(-400, 400),
             Random::getRandomFloat(50, 100)
         }; 
         Transform transform{randPosition};
 
+        //Collider
         Collider* collider;
         switch(Random::getRandomInt(0, 1)) {
             case 0:
@@ -34,22 +36,26 @@ void createEntites() {
                 break;
         }
 
+        //Rigidbody
         float fallVelocity = Random::getRandomFloat(1, 2);
         Vector velocity({0, -fallVelocity});
-
         const double PI = 3.1415926535;
         double anglularVelocity = Random::getRandomDouble(-(PI / 36), (PI / 36));
-
         Rigidbody rigidbody{velocity, anglularVelocity};
 
-
+        //Entity Creation
         Entity* entity = new Entity{id, transform, collider, &rigidbody};
-        entities.push_back(entity);
-        WebsocketOutput::createEntity(*entity);
-
+        
+        //Clean up
         delete collider;
         collider = nullptr;
 
+        //Check Validation
+
+
+        //Valid Entity Placement
+        entities.push_back(entity);
+        WebsocketOutput::createEntity(*entity);
         id++;
 
     }
@@ -87,7 +93,6 @@ int main() {
         // --- Output JSON ---
         createEntites();
         updateEntities();
-        std::cout << entities[0]->to_string();
         deleteEntities();
 
         //Break Loop
