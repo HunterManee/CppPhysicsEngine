@@ -49,6 +49,7 @@ class WebsocketOutput {
                     {"x", (int)(rigidbody->getVelocity().i * 100) / 100.00},
                     {"y", (int)(rigidbody->getVelocity().j * 100) / 100.00}
                 };
+                j["data"]["angular_velocity"] = rigidbody->getAngularVelocity();
 
                 delete rigidbody;
                 rigidbody = nullptr;
@@ -68,6 +69,7 @@ class WebsocketOutput {
                 {"x", (int)(transform.getPosition().i * 100) / 100.00},
                 {"y", (int)(transform.getPosition().j * 100) / 100.00}
             };
+            j["data"]["rotation"] = transform.getRotation();
 
             Rigidbody* rigidbody = entity.getNewRigidbody();
             if(rigidbody != NULL) {
@@ -75,6 +77,7 @@ class WebsocketOutput {
                     {"x", (int)(rigidbody->getVelocity().i * 100) / 100.00},
                     {"y", (int)(rigidbody->getVelocity().j * 100) / 100.00}
                 };
+                j["data"]["angular_velocity"] = rigidbody->getAngularVelocity();
 
                 delete rigidbody;
                 rigidbody = nullptr;

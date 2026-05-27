@@ -41,10 +41,12 @@ Rigidbody* Entity::getNewRigidbody() const{
     return rigidbody->clone();
 }
 
-void Entity::move(const Vector velocity) {
-    Vector nextPosition = transform.getPosition() + velocity;
-    transform.setPosition(nextPosition);
-    rigidbody->setVelocity(velocity);
+void Entity::move() {
+    Vector newPosition = transform.getPosition() + rigidbody->getVelocity();
+    transform.setPosition(newPosition);
+
+    double newRotation = transform.getRotation() + rigidbody->getAngularVelocity();
+    transform.setRotation(newRotation);
 }
 
 Entity* Entity::clone() const{

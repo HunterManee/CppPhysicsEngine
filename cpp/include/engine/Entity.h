@@ -29,7 +29,7 @@ class Entity{
         Collider* getNewCollider() const;
         Rigidbody* getNewRigidbody() const;
 
-        void move(const Vector velocity);
+        void move();
 
         Entity* clone() const;
         std::string to_string() const;

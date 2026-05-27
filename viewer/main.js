@@ -36,6 +36,7 @@ function createEntity(data) {
 }
 
 function updateEntity(data) {
+    console.log(data);
     const id = data.id;
     for(const key in data) {
         if(key === "id") continue;

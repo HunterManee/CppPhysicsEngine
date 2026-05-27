@@ -34,8 +34,14 @@ void createEntites() {
                 break;
         }
 
-        Vector velocity({});
-        Rigidbody rigidbody{velocity};
+        float fallVelocity = Random::getRandomFloat(1, 2);
+        Vector velocity({0, -fallVelocity});
+
+        const double PI = 3.1415926535;
+        double anglularVelocity = Random::getRandomDouble(-(PI / 36), (PI / 36));
+
+        Rigidbody rigidbody{velocity, anglularVelocity};
+
 
         Entity* entity = new Entity{id, transform, collider, &rigidbody};
         entities.push_back(entity);
@@ -49,9 +55,8 @@ void createEntites() {
     }
 }
 void updateEntities() {
-    Vector velocity{(float)0, (float)-1};
     for(Entity* entity : entities) {
-        entity->move(velocity);
+        entity->move();
         WebsocketOutput::updateEntity(*entity);
     }
 }
@@ -82,6 +87,7 @@ int main() {
         // --- Output JSON ---
         createEntites();
         updateEntities();
+        std::cout << entities[0]->to_string();
         deleteEntities();
 
         //Break Loop

@@ -1,17 +1,26 @@
 #include "engine/Rigidbody.h"
 
 Rigidbody::Rigidbody():
-Velocity{{}} {}
+Velocity{{}}, AngularVelocity{0} {}
 Rigidbody::Rigidbody(const Vector velocity):
-Velocity{velocity} {}
+Velocity{velocity}, AngularVelocity{0} {}
+Rigidbody::Rigidbody(const Vector velocity, const double angularVelocity):
+Velocity{velocity}, AngularVelocity{angularVelocity} {}
 Rigidbody::Rigidbody(const Rigidbody& toCopy):
-Velocity{toCopy.Velocity} {}
+Velocity{toCopy.Velocity}, AngularVelocity{toCopy.AngularVelocity} {}
 
 Vector Rigidbody::getVelocity() const {
     return Velocity;
 }
 void Rigidbody::setVelocity(const Vector velocity) {
     Velocity = velocity;
+}
+
+double Rigidbody::getAngularVelocity() const{
+    return AngularVelocity;
+}
+void Rigidbody::setAngularVelocity(const double angularVelocity) {
+    AngularVelocity = angularVelocity;
 }
 
 Rigidbody* Rigidbody::clone() const {
@@ -22,6 +31,7 @@ std::string Rigidbody::to_string() const {
 
     output += "--Rigidbody--------------------------\n";
     output += "  L--> Velocity: " + Velocity.to_string() + "\n";
+    output += "  L--> AngularVelocity: " + std::to_string(AngularVelocity) + "\n";
 
     return output;
 }
