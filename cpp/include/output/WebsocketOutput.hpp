@@ -8,7 +8,7 @@ class WebsocketOutput {
     public:
         static void createEntity(const Entity& entity) {
             json j;
-            j["type"] = "spawn";
+            j["type"] = "create";
             j["data"]["id"] = entity.getId();
 
             Transform transform = entity.getTransform();

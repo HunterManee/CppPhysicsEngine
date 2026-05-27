@@ -12,11 +12,10 @@
 #include "output/WebsocketOutput.hpp"
 
 std::vector<Entity*> entities{};
-const int MAX_ENTITIES = 2;
+const int MAX_ENTITIES = 5;
 signed int id = 0;
 
 void createEntites() {
-    if(id > MAX_ENTITIES) return;
     while(entities.size() < MAX_ENTITIES) {
 
         Vector randPosition = {

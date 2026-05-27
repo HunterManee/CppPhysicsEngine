@@ -1,6 +1,5 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-
 const entities = new Map();
 
 // --- WebSocket connection --
@@ -13,12 +12,14 @@ socket.onopen = () => {
 socket.onmessage = (event) => {
     try {
         const currentData = JSON.parse(event.data);
-        if(currentData.type === "spawn") {
-            const data = currentData.data;
-            entities.set(data.id, data);
+        if(currentData.type === "create") {
+            createEntity(currentData.data);
         }
         if(currentData.type === "update") {
-            updateEntitiesMap(currentData.data);
+            updateEntity(currentData.data);
+        }
+        if(currentData.type == "delete") {
+            deleteEntity(currentData.data);
         }
     } catch (e) {
         console.error("Invalid JSON:", event.data);
@@ -29,14 +30,23 @@ socket.onclose = () => {
     console.log("Disconnected from server");
 };
 
-// --- Update Data -------------
-function updateEntitiesMap(data) {
+// --- WS DATA -------------
+function createEntity(data) {
+    entities.set(data.id, data);
+}
+
+function updateEntity(data) {
     const id = data.id;
     for(const key in data) {
         if(key === "id") continue;
 
         entities.get(id)[key] = data[key]
     }
+}
+
+function deleteEntity(data) {
+    const id = data.id;
+    entities.delete(id);
 }
 
 
