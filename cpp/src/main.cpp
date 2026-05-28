@@ -14,14 +14,38 @@
 std::vector<Entity*> entities{};
 const int MAX_ENTITIES = 5;
 signed int id = 0;
-
+float getRadius(Entity& entity) {
+    Collider* collider = entity.getNewCollider();
+    float radius = 0;
+    if(auto circle = dynamic_cast<CircleCollider*>(collider)) {
+        radius = circle->getRadius();
+    }else if(auto polygon = dynamic_cast<PolygonCollider*>(collider)) {
+        for(int i = 0; i < polygon->getTotalVerticies(); i++) {
+            float magnitude = polygon->getVertex(i).magnitude();
+            if(magnitude < radius) continue;
+            radius = magnitude;
+        }
+    }
+    delete collider;
+    collider = nullptr;
+    return radius;
+}
+bool validEntity(Entity& entity) {
+    float entityRadius = getRadius(entity);
+    for(Entity* e : entities) {
+        Vector diff = entity.getTransform().getPosition() - e->getTransform().getPosition();
+        float radius = entityRadius + getRadius(*e);
+        if (diff.i * diff.i + diff.j * diff.j < radius * radius) return false;
+    }
+    return true;
+}
 void createEntites() {
     while(entities.size() < MAX_ENTITIES) {
 
         //Transformation
         Vector randPosition = {
             Random::getRandomFloat(-400, 400),
-            Random::getRandomFloat(50, 100)
+            Random::getRandomFloat(50, 200)
         }; 
         Transform transform{randPosition};
 
@@ -50,8 +74,8 @@ void createEntites() {
         delete collider;
         collider = nullptr;
 
-        //Check Validation
-
+        //Create Validation
+        if(!validEntity(*entity)) continue;
 
         //Valid Entity Placement
         entities.push_back(entity);
@@ -60,6 +84,7 @@ void createEntites() {
 
     }
 }
+
 void updateEntities() {
     for(Entity* entity : entities) {
         entity->move();
@@ -105,5 +130,4 @@ int main() {
         }
     }
     
-
 }

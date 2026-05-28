@@ -24,11 +24,10 @@ class WebsocketOutput {
 
             Collider* collider = entity.getNewCollider();
             if(collider != nullptr) {
+                j["data"]["shape"] = collider->getShape();
                 if(auto circle = dynamic_cast<CircleCollider*>(collider)) {
-                    j["data"]["shape"] = "circle";
                     j["data"]["radius"] = (int)(circle->getRadius() * 100) / 100.00;
                 }else if(auto polygon = dynamic_cast<PolygonCollider*>(collider)) {
-                    j["data"]["shape"] = "polygon";
                     j["data"]["vertices"] = json::array();
                     for(int i = 0; i < polygon->getTotalVerticies(); i++) {
                         Vector vertex = polygon->getVertex(i);

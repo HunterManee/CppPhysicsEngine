@@ -1,11 +1,11 @@
 #include "engine/CircleCollider.h"
 
 CircleCollider::CircleCollider():
-Radius{Random::getRandomFloat(Min_Build_Radius, Max_Build_Radius)} {}
+Collider{Circle}, Radius{Random::getRandomFloat(Min_Build_Radius, Max_Build_Radius)} {}
 CircleCollider::CircleCollider(float radius):
-Radius{radius} {}
+Collider{Circle}, Radius{radius} {}
 CircleCollider::CircleCollider(const CircleCollider& toCopy):
-Radius{toCopy.Radius} {}
+Collider{toCopy.Shape}, Radius{toCopy.Radius} {}
 
 float CircleCollider::getRadius() const {
     return Radius;

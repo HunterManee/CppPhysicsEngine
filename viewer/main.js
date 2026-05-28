@@ -123,11 +123,12 @@ async function render() {
 
 
     entities.forEach(entity => {
-        if (entity.shape === "polygon") {
-            drawPolygon(entity);
-        }
-        else if(entity.shape === "circle") {
+        console.log(entity.shape);
+        if (entity.shape == 0) {
             drawCircle(entity)
+        }
+        else if(entity.shape == 1) {
+            drawPolygon(entity);
         }
     })
 

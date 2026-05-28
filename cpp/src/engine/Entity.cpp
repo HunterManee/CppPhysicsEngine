@@ -57,6 +57,7 @@ std::string Entity::to_string() const {
 
     output += "Entity-------------------------------\n";
     output += "id: " + std::to_string(ID) + "\n";
+    output += "shape: " + std::to_string((int)collider->getShape()) + "\n";
     output += transform.to_string();
     
     if(collider != nullptr) output += collider->to_string();

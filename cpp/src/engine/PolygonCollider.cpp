@@ -1,9 +1,11 @@
 #include "engine/PolygonCollider.h"
 
-PolygonCollider::PolygonCollider(){
+PolygonCollider::PolygonCollider():
+Collider{Polygon}{
     setRandVertices();
 }
-PolygonCollider::PolygonCollider(const PolygonCollider& toCopy){
+PolygonCollider::PolygonCollider(const PolygonCollider& toCopy):
+Collider{toCopy.Shape}{
     for(Vector vertex : toCopy.Vertices) {
         Vertices.push_back(vertex);
     }
