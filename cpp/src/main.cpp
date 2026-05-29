@@ -13,27 +13,27 @@
 #include "output/WebsocketOutput.hpp"
 
 std::vector<Entity*> entities{};
-const int MAX_ENTITIES = 5;
+const int MAX_ENTITIES = 100;
 signed int id = 0;
 
 void createEntites() {
-    while(entities.size() < MAX_ENTITIES) {
+    if(entities.size() < MAX_ENTITIES) {
 
         //Transformation
         Vector randPosition = {
             Random::getRandomFloat(-400, 400),
-            Random::getRandomFloat(50, 200)
+            Random::getRandomFloat(1000, 1500)
         }; 
         Transform transform{randPosition};
 
         //Collider
         Collider* collider;
-        switch(Random::getRandomInt(0, 1)) {
+        switch(Random::getRandomInt(0,0)) {
             case 0:
-                collider = new PolygonCollider{};
+                collider = new CircleCollider{};
                 break;
             case 1:
-                collider = new CircleCollider{};
+                collider = new PolygonCollider{};
                 break;
         }
 
@@ -52,7 +52,7 @@ void createEntites() {
         collider = nullptr;
 
         //Create Validation
-        if(Collision::hasOverlappingCircle(*entity, entities)) continue;
+        if(Collision::hasOverlappingCircle(*entity, entities, 5)) return;
 
         //Valid Entity Placement
         entities.push_back(entity);

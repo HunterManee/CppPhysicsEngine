@@ -8,9 +8,8 @@
 class Collision
 {
     public:
-        static bool hasOverlappingCircle(Entity& entity, std::vector<Entity*>& entities) {
+        static bool hasOverlappingCircle(Entity& entity, std::vector<Entity*>& entities, float offset = 0) {
             float entityRadius = getOverlapRadius(entity);
-            float offset = 5;
             for(Entity* e : entities) {
                 if(entity.getId() == e->getId()) continue;
                 Vector diff = entity.getTransform().getPosition() - e->getTransform().getPosition();
