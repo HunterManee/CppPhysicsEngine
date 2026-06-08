@@ -31,22 +31,44 @@ Entity::~Entity(){
 signed int Entity::getId() const{
     return ID;
 }
-Transform Entity::getTransform() const{
+
+SHAPE Entity::getShape() const{
+    return collider->getShape();
+}
+float Entity::getBuildRadius() const {
+    return collider->getBuildRadius();
+}
+
+Transform& Entity::getTransform(){
     return transform;
 }
 Collider* Entity::getNewCollider() const{
     return collider->clone();
 }
-Rigidbody* Entity::getNewRigidbody() const{
-    return rigidbody->clone();
+Rigidbody* Entity::getRigidbody() const {
+    return rigidbody;
 }
 
-void Entity::move() {
-    Vector newPosition = transform.getPosition() + rigidbody->getVelocity();
+void Entity::move(float dt) {
+    Vector newPosition = transform.getPosition() + rigidbody->getVelocity() * dt;
     transform.setPosition(newPosition);
 
-    double newRotation = transform.getRotation() + rigidbody->getAngularVelocity();
+    double newRotation = transform.getRotation() + rigidbody->getAngularVelocity() * dt;
     transform.setRotation(newRotation);
+}
+
+void Entity::move(Vector acceleration, float dt) {
+    Vector newVelocity = rigidbody->getVelocity() + acceleration * dt;
+    rigidbody->setVelocity(newVelocity);
+
+    move(dt);
+}
+
+void Entity::move(double angularAcceleration, float dt) {
+    double newAngularVelocity = rigidbody->getAngularVelocity() + angularAcceleration * dt;
+    rigidbody->setAngularVelocity(newAngularVelocity);
+
+    move(dt);
 }
 
 Entity* Entity::clone() const{
@@ -58,6 +80,7 @@ std::string Entity::to_string() const {
     output += "Entity-------------------------------\n";
     output += "id: " + std::to_string(ID) + "\n";
     output += "shape: " + std::to_string((int)collider->getShape()) + "\n";
+    output += "build radius: " + std::to_string(collider->getBuildRadius()) + "\n";
     output += transform.to_string();
     
     if(collider != nullptr) output += collider->to_string();

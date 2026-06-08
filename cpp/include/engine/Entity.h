@@ -11,7 +11,7 @@ class Entity{
         Transform transform;
         Collider* collider;
         Rigidbody* rigidbody;
-
+    
     public:
         Entity(signed int id = 0);
         Entity(signed int id, const Collider* c);
@@ -25,13 +25,18 @@ class Entity{
         ~Entity();
 
         signed int getId() const;
-        Transform getTransform() const;
+        SHAPE getShape() const;
+        float getBuildRadius() const;
+        Transform& getTransform() ;
         Collider* getNewCollider() const;
-        Rigidbody* getNewRigidbody() const;
+        Rigidbody* getRigidbody() const;
 
-        void move();
+        void move(float dt);
+        void move(Vector acceleration, float dt);
+        void move(double angularAcceleration, float dt);
 
         Entity* clone() const;
         std::string to_string() const;
+
 
 };

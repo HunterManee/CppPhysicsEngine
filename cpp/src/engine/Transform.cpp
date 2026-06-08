@@ -11,7 +11,7 @@ Vector Transform::getPosition() const {
     return Position;
 }
 void Transform::setPosition(const Vector& position) {
-    Position = position;
+    this->Position = position;
 }
 
 double Transform::getRotation() const {

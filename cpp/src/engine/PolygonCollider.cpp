@@ -5,7 +5,7 @@ Collider{Polygon}{
     setRandVertices();
 }
 PolygonCollider::PolygonCollider(const PolygonCollider& toCopy):
-Collider{toCopy.Shape}{
+Collider{toCopy.Shape, toCopy.Build_Radius}{
     for(Vector vertex : toCopy.Vertices) {
         Vertices.push_back(vertex);
     }
@@ -41,7 +41,7 @@ void PolygonCollider::setRandVertices() {
 
     //Vector{float magnitude, double theta}
     //Create the max for the range for magnitude
-    const float MAX_MAGNITUDE = Random::getRandomFloat(Min_Build_Radius, Max_Build_Radius);
+    const float MAX_MAGNITUDE = Build_Radius;
 
     //Create the range for the change in radians
     const double TAU = 6.283185307179586;
@@ -66,7 +66,11 @@ void PolygonCollider::setRandVertices() {
     //Determine the new center of the shape
     centroid = centroid / totalVertices;
 
+    float newBuildRadius = 0;
     for(Vector vertex : vertices) {
         Vertices.push_back(vertex - centroid);
+        float distance = sqrt(vertex.i * vertex.i + vertex.j * vertex.j);
+        if(distance > newBuildRadius) newBuildRadius = distance;
     }
+    Build_Radius = newBuildRadius;
 }

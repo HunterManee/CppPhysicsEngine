@@ -6,7 +6,7 @@ using json = nlohmann::json;
 
 class WebsocketOutput {
     public:
-        static void createEntity(const Entity& entity) {
+        static void createEntity(Entity& entity) {
             json j;
             j["type"] = "create";
             j["data"]["id"] = entity.getId();
@@ -42,7 +42,7 @@ class WebsocketOutput {
                 collider = nullptr;
             }
 
-            Rigidbody* rigidbody = entity.getNewRigidbody();
+            Rigidbody* rigidbody = entity.getRigidbody();
             if(rigidbody != NULL) {
                 j["data"]["velocity"] = {
                     {"x", (int)(rigidbody->getVelocity().i * 100) / 100.00},
@@ -50,14 +50,12 @@ class WebsocketOutput {
                 };
                 j["data"]["angular_velocity"] = rigidbody->getAngularVelocity();
 
-                delete rigidbody;
-                rigidbody = nullptr;
             }
 
             std::cout << j.dump() << std::endl;
         }
 
-        static void updateEntity(const Entity& entity) {
+        static void updateEntity(Entity& entity) {
 
             json j;
             j["type"] = "update";
@@ -70,7 +68,7 @@ class WebsocketOutput {
             };
             j["data"]["rotation"] = transform.getRotation();
 
-            Rigidbody* rigidbody = entity.getNewRigidbody();
+            Rigidbody* rigidbody = entity.getRigidbody();
             if(rigidbody != NULL) {
                 j["data"]["velocity"] = {
                     {"x", (int)(rigidbody->getVelocity().i * 100) / 100.00},
@@ -78,8 +76,6 @@ class WebsocketOutput {
                 };
                 j["data"]["angular_velocity"] = rigidbody->getAngularVelocity();
 
-                delete rigidbody;
-                rigidbody = nullptr;
             }
 
             std::cout << j.dump() << std::endl;
