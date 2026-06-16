@@ -40,10 +40,12 @@ class Collision
                 Vector ePositionF = ePositionI + eVelocity;
                 Vector lowestEntityPoint = 
                     (ePositionI.j - entity->getBuildRadius() < ePositionF.j - entity->getBuildRadius())? 
-                    Vector{ePositionI.i, ePositionI.j - entity->getBuildRadius()} : Vector{ePositionF.i, ePositionF.j - entity->getBuildRadius()};
+                    Vector{ePositionI.i, ePositionI.j - entity->getBuildRadius()} : 
+                    Vector{ePositionF.i, ePositionF.j - entity->getBuildRadius()};
                 Vector highestEnityPoint = 
                     (ePositionI.j + entity->getBuildRadius() > ePositionF.j + entity->getBuildRadius())? 
-                    Vector{ePositionI.i, ePositionI.j + entity->getBuildRadius()} : Vector{ePositionF.i, ePositionF.j + entity->getBuildRadius()};
+                    Vector{ePositionI.i, ePositionI.j + entity->getBuildRadius()} : 
+                    Vector{ePositionF.i, ePositionF.j + entity->getBuildRadius()};
                 
 
                 Entity* other = entities[i];

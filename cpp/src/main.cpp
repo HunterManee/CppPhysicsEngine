@@ -12,6 +12,8 @@
 
 #include "output/WebsocketOutput.hpp"
 
+//Hello
+
 std::vector<Entity*> entities{};
 const int MAX_ENTITIES = 100;
 signed int id = 0;
