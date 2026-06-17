@@ -26,8 +26,6 @@ class Collision
 
         static CollisionResults findEarliestCollisions(int entityIndex, std::vector<Entity*>& entities, float dt) {
 
-
-
             Entity* entity = entities[entityIndex];
             float T = 1;
             Entity* collided = nullptr;
@@ -102,10 +100,12 @@ class Collision
                     collided = other;
                 }
             }
+
             return CollisionResults{T, collided};
+
         }
 
-        static void testing(Entity* entity, CollisionResults cr){
+        static void collisionResponse(Entity* entity, CollisionResults cr){
             Vector ePosition = entity->getTransform().getPosition();
             Vector oPosition = cr.other->getTransform().getPosition();
             Vector normal = (ePosition - oPosition).normalize();
@@ -117,8 +117,8 @@ class Collision
             float velAlongNormal = dot(relativeVelocity, normal);
             if(velAlongNormal > 0) return;
 
-            float eMass = 1;
-            float oMass = 1;
+            float eMass = entity->getRigidbody()->getMass() * entity->getRigidbody()->getMass();
+            float oMass = cr.other->getRigidbody()->getMass() * cr.other->getRigidbody()->getMass();
 
             float restitution = 1.0f; //1 = perfectly bouncy
 

@@ -12,14 +12,12 @@
 
 #include "output/WebsocketOutput.hpp"
 
-//Testing Testing
-
 std::vector<Entity*> entities{};
 const int MAX_ENTITIES = 100;
 signed int id = 0;
 
 void droppingEnitities() {
-   if(entities.size() < MAX_ENTITIES) {
+    if(entities.size() < MAX_ENTITIES) {
 
         //Transformation
         Vector randPosition = {
@@ -44,7 +42,7 @@ void droppingEnitities() {
         Vector velocity((float)0, -fallVelocity);
         const double PI = 3.1415926535;
         double anglularVelocity = Random::getRandomDouble(-(PI / 36), (PI / 36));
-        Rigidbody rigidbody{velocity, anglularVelocity};
+        Rigidbody rigidbody{velocity, anglularVelocity, collider->getBuildRadius()};
 
         //Entity Creation
         Entity* entity = new Entity{id, transform, collider, &rigidbody};
@@ -69,7 +67,7 @@ void test() {
     //Moving Circle
     Vector positionB((float)400, (float)300);
     Transform transformB{positionB};
-    Collider* colliderB = new CircleCollider(100);
+    Collider* colliderB = new CircleCollider(10);
     Vector velocityB((float)-100, (float)-100);
     double angualarVelocityB = 0;
     Rigidbody rigidbodyB{velocityB, angualarVelocityB};
@@ -95,8 +93,6 @@ void test() {
     entities.push_back(entityA);;
     WebsocketOutput::createEntity(*entityA);
 
-
-    
 }
 void createEntities() {
  
@@ -128,10 +124,8 @@ void updateEntities(float dt) {
         Vector newPos = pos + vel * cr.collisionTime * dt;
         entity->getTransform().setPosition(newPos);
 
-        std::cout << "CollisionTime: " << cr.collisionTime << std::endl;
-
         if(cr.collisionTime < 1.0) {
-            Collision::testing(entity, cr);
+            Collision::collisionResponse(entity, cr);
             pos = entity->getTransform().getPosition();
             vel = entity->getRigidbody()->getVelocity();
             
@@ -141,10 +135,7 @@ void updateEntities(float dt) {
             
         }
 
-
         WebsocketOutput::updateEntity(*entity);
-
-
 
     }
 
